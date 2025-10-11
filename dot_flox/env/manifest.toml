@@ -26,6 +26,10 @@ lazyjj.pkg-path = "lazyjj"
 neovim-nightly.flake = "github:nix-community/neovim-nightly-overlay"
 lua-language-server.pkg-path = "lua-language-server"
 ripgrep.pkg-path = "ripgrep"
+zoxide.pkg-path = "zoxide"
+fd.pkg-path = "fd"
+tmux.pkg-path = "tmux"
+bat.pkg-path = "bat"
 
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
@@ -67,7 +71,12 @@ ripgrep.pkg-path = "ripgrep"
 # bash = ...
 # zsh  = ...
 # fish = ...
+fish = '''
+  set PATH $PATH:$HOME/.local/bin
 
+  fzf --fish | source
+  zoxide init fish | source
+'''
 
 ## Services ----------------------------------------------------------
 ##  $ flox services start             <- Starts all services

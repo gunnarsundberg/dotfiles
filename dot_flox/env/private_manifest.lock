@@ -3,6 +3,12 @@
   "manifest": {
     "version": 1,
     "install": {
+      "bat": {
+        "pkg-path": "bat"
+      },
+      "fd": {
+        "pkg-path": "fd"
+      },
       "fzf": {
         "pkg-path": "fzf"
       },
@@ -29,10 +35,18 @@
       },
       "ripgrep": {
         "pkg-path": "ripgrep"
+      },
+      "tmux": {
+        "pkg-path": "tmux"
+      },
+      "zoxide": {
+        "pkg-path": "zoxide"
       }
     },
     "hook": {},
-    "profile": {},
+    "profile": {
+      "fish": "  set PATH $PATH:$HOME/.local/bin\n\n  fzf --fish | source\n  zoxide init fish | source\n"
+    },
     "options": {
       "systems": [
         "aarch64-darwin",
@@ -43,6 +57,238 @@
     }
   },
   "packages": [
+    {
+      "attr_path": "bat",
+      "broken": false,
+      "derivation": "/nix/store/1y6g0203xf3bn4n0dicyiy670gyzkgpy-bat-0.25.0.drv",
+      "description": "Cat(1) clone with syntax highlighting and Git integration",
+      "install_id": "bat",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "bat-0.25.0",
+      "pname": "bat",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T02:58:44.569700Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/lk5brj47jsys8aaq7pwm2lylgxjbfjvv-bat-0.25.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "bat",
+      "broken": false,
+      "derivation": "/nix/store/i2jkm66jasgdf9lbakd01vizm33z01f9-bat-0.25.0.drv",
+      "description": "Cat(1) clone with syntax highlighting and Git integration",
+      "install_id": "bat",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "bat-0.25.0",
+      "pname": "bat",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:27:47.552015Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/gyp2jfikrhzvn4ypy58b7sv5mmm6nqi2-bat-0.25.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "bat",
+      "broken": false,
+      "derivation": "/nix/store/a3avwy094qzsn99878syh8h54qbnk84q-bat-0.25.0.drv",
+      "description": "Cat(1) clone with syntax highlighting and Git integration",
+      "install_id": "bat",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "bat-0.25.0",
+      "pname": "bat",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:55:27.940417Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/g5milnz7i56cxz9qm3dsqcc053m3i7xz-bat-0.25.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "bat",
+      "broken": false,
+      "derivation": "/nix/store/88xc3k5ad116slacnw5fa64rqd8445gy-bat-0.25.0.drv",
+      "description": "Cat(1) clone with syntax highlighting and Git integration",
+      "install_id": "bat",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "bat-0.25.0",
+      "pname": "bat",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:26:37.708204Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/nm4blhy7bz47k6gbfk2g2k8qs0wq4m3j-bat-0.25.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fd",
+      "broken": false,
+      "derivation": "/nix/store/997c71vfc00918wmi1nnnldhkwla8fxm-fd-10.3.0.drv",
+      "description": "Simple, fast and user-friendly alternative to find",
+      "install_id": "fd",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "fd-10.3.0",
+      "pname": "fd",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T02:58:45.325572Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "10.3.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/glkzsfqgjp9bx6hia74abfqa9wsczfx7-fd-10.3.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fd",
+      "broken": false,
+      "derivation": "/nix/store/hihpqwhwr2901cg8dcpp1n54xgrqqaaw-fd-10.3.0.drv",
+      "description": "Simple, fast and user-friendly alternative to find",
+      "install_id": "fd",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "fd-10.3.0",
+      "pname": "fd",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:27:48.619891Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "10.3.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/5knx1nr9z2hli0zdq4h862ld5hniv8mp-fd-10.3.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fd",
+      "broken": false,
+      "derivation": "/nix/store/fiq8sjysh4vh3bsk8nkk5fmq5rwmr47p-fd-10.3.0.drv",
+      "description": "Simple, fast and user-friendly alternative to find",
+      "install_id": "fd",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "fd-10.3.0",
+      "pname": "fd",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:55:28.669896Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "10.3.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/zps336phz86q9lyxkpm66jg8k1qlnvc0-fd-10.3.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fd",
+      "broken": false,
+      "derivation": "/nix/store/i7d9g6ndz2vskqrp6k3673rlqy4kp1k0-fd-10.3.0.drv",
+      "description": "Simple, fast and user-friendly alternative to find",
+      "install_id": "fd",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "fd-10.3.0",
+      "pname": "fd",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:26:38.915045Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "10.3.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/f5p1y2d1i025kbnikf9p7m2q3sm3gpnd-fd-10.3.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
     {
       "attr_path": "fzf",
       "broken": false,
@@ -986,13 +1232,253 @@
       "priority": 5
     },
     {
+      "attr_path": "tmux",
+      "broken": false,
+      "derivation": "/nix/store/zrmpc3dakzi4knn3zl5qmawpryfz04js-tmux-3.5a.drv",
+      "description": "Terminal multiplexer",
+      "install_id": "tmux",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmux-3.5a",
+      "pname": "tmux",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:00:47.139056Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5a",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/8lyq0k1anmfhbrysghldk2r79ga90dsm-tmux-3.5a-man",
+        "out": "/nix/store/k3v83bi8jkh2mmsp0j3mxh6riq2jhhax-tmux-3.5a"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmux",
+      "broken": false,
+      "derivation": "/nix/store/0wvyhfjqb2shcmjghplzkmwd6crdja9i-tmux-3.5a.drv",
+      "description": "Terminal multiplexer",
+      "install_id": "tmux",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmux-3.5a",
+      "pname": "tmux",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:30:33.836345Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5a",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/w4bzn27gp5r5q7jkr3mskz4zxh0vbxwn-tmux-3.5a-man",
+        "out": "/nix/store/lqhk21lyfi2bziqym8mawjmp3hspinm1-tmux-3.5a"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmux",
+      "broken": false,
+      "derivation": "/nix/store/namha2zfg5l3c041cych13zrrq8zsqjp-tmux-3.5a.drv",
+      "description": "Terminal multiplexer",
+      "install_id": "tmux",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmux-3.5a",
+      "pname": "tmux",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:57:38.677476Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5a",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/7bznb1vb3kpyw5vwmd9kps6fsrn78wkb-tmux-3.5a-man",
+        "out": "/nix/store/gqa10xq4hllq9n1xvdnb6fjkm3vcbw9h-tmux-3.5a"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmux",
+      "broken": false,
+      "derivation": "/nix/store/vjszfhjvvzxaxfhjd2rhdy5mwb5jfqmw-tmux-3.5a.drv",
+      "description": "Terminal multiplexer",
+      "install_id": "tmux",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmux-3.5a",
+      "pname": "tmux",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:29:45.235830Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5a",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/pxl2q3i1i7slypcz6bpjmzqfv48d23ha-tmux-3.5a-man",
+        "out": "/nix/store/3gzj3jqjnxqvaycas4z8z6y9bxa43a2z-tmux-3.5a"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "zoxide",
+      "broken": false,
+      "derivation": "/nix/store/w0jvbi48vgylc7m7scvi0l28zzlqszlw-zoxide-0.9.8.drv",
+      "description": "Fast cd command that learns your habits",
+      "install_id": "zoxide",
+      "license": "[ MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "zoxide-0.9.8",
+      "pname": "zoxide",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:01:13.161320Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.8",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/5b2imcwqjd62i8r3xzwvrzxak016vybk-zoxide-0.9.8"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "zoxide",
+      "broken": false,
+      "derivation": "/nix/store/ixhimw9qr23gysi32p0f1mr694262d5d-zoxide-0.9.8.drv",
+      "description": "Fast cd command that learns your habits",
+      "install_id": "zoxide",
+      "license": "[ MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "zoxide-0.9.8",
+      "pname": "zoxide",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:31:07.680453Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.8",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/kyw0hs7jx2wdfv4ww4jxx839xpqx0sjr-zoxide-0.9.8"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "zoxide",
+      "broken": false,
+      "derivation": "/nix/store/wq677dpvs0aj507s5v1204hsmycrbr7p-zoxide-0.9.8.drv",
+      "description": "Fast cd command that learns your habits",
+      "install_id": "zoxide",
+      "license": "[ MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "zoxide-0.9.8",
+      "pname": "zoxide",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:58:06.507371Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.8",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/6k38wx17mah9xkbs2qjk08ywxjs8bgkg-zoxide-0.9.8"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "zoxide",
+      "broken": false,
+      "derivation": "/nix/store/fia5kxwgbc39lvhyw5gmv8w32fcfhkdf-zoxide-0.9.8.drv",
+      "description": "Fast cd command that learns your habits",
+      "install_id": "zoxide",
+      "license": "[ MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "zoxide-0.9.8",
+      "pname": "zoxide",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:30:24.088387Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.8",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/7lh4ina0b99aql433h56iq3fvp1d8znn-zoxide-0.9.8"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
       "install_id": "neovim-nightly",
-      "locked-url": "github:nix-community/neovim-nightly-overlay/00e7d4ab17e88a4c342555c18ad09faefb6f4901?narHash=sha256-2aW1xnaKgeV09jGHijD090F%2B6dHwE/LLxaVjcfYVsGQ%3D",
+      "locked-url": "github:nix-community/neovim-nightly-overlay/d5ef90cf4577df3e3daef7e070d200cca64c889f?narHash=sha256-87aML9i/zVm5WSCEx59PUpCrpkLbXEqcLEFPNn5%2B2iE%3D",
       "flake-description": "Neovim flake",
       "locked-flake-attr-path": "packages.aarch64-darwin.default",
-      "derivation": "/nix/store/g8w75z7l017kjcwxm5kn7s89819c838f-neovim-unwrapped-nightly.drv",
+      "derivation": "/nix/store/k23nqpwi4s9jky54sfn234c67ry5xpmx-neovim-unwrapped-nightly.drv",
       "outputs": {
-        "out": "/nix/store/yi9qh9nl9bar2zj09bv07483b2aggzri-neovim-unwrapped-nightly"
+        "out": "/nix/store/laz5xai59qp5rl6pm9rkdyaljha2rfiv-neovim-unwrapped-nightly"
       },
       "output-names": [
         "out"
@@ -1017,13 +1503,13 @@
     },
     {
       "install_id": "neovim-nightly",
-      "locked-url": "github:nix-community/neovim-nightly-overlay/00e7d4ab17e88a4c342555c18ad09faefb6f4901?narHash=sha256-2aW1xnaKgeV09jGHijD090F%2B6dHwE/LLxaVjcfYVsGQ%3D",
+      "locked-url": "github:nix-community/neovim-nightly-overlay/d5ef90cf4577df3e3daef7e070d200cca64c889f?narHash=sha256-87aML9i/zVm5WSCEx59PUpCrpkLbXEqcLEFPNn5%2B2iE%3D",
       "flake-description": "Neovim flake",
       "locked-flake-attr-path": "packages.aarch64-linux.default",
-      "derivation": "/nix/store/sxazwr6pw1vfvg8zc0r8sbr5irp6pjnk-neovim-unwrapped-nightly.drv",
+      "derivation": "/nix/store/1z1k6wgqagzk6wbyarb2y7m20cpdd1cv-neovim-unwrapped-nightly.drv",
       "outputs": {
-        "debug": "/nix/store/z309df9gl5vijdm3wy92vzgyxn94rqnc-neovim-unwrapped-nightly-debug",
-        "out": "/nix/store/m9a9dglrhgga9zva68ihz7khmcv05f33-neovim-unwrapped-nightly"
+        "debug": "/nix/store/g0pzx6d1vzkvm1fcazawm7kdy25v1qc3-neovim-unwrapped-nightly-debug",
+        "out": "/nix/store/r91qis9m6nisfghpvfkmyqyrc31gihbv-neovim-unwrapped-nightly"
       },
       "output-names": [
         "out",
@@ -1049,12 +1535,12 @@
     },
     {
       "install_id": "neovim-nightly",
-      "locked-url": "github:nix-community/neovim-nightly-overlay/00e7d4ab17e88a4c342555c18ad09faefb6f4901?narHash=sha256-2aW1xnaKgeV09jGHijD090F%2B6dHwE/LLxaVjcfYVsGQ%3D",
+      "locked-url": "github:nix-community/neovim-nightly-overlay/d5ef90cf4577df3e3daef7e070d200cca64c889f?narHash=sha256-87aML9i/zVm5WSCEx59PUpCrpkLbXEqcLEFPNn5%2B2iE%3D",
       "flake-description": "Neovim flake",
       "locked-flake-attr-path": "packages.x86_64-darwin.default",
-      "derivation": "/nix/store/jqycky6wrsg0p04q7dzsjphh2gzm4k8z-neovim-unwrapped-nightly.drv",
+      "derivation": "/nix/store/aczck1yy30lr7ycxca9vzm6smnv1jrcx-neovim-unwrapped-nightly.drv",
       "outputs": {
-        "out": "/nix/store/iwsg171xi07dvsspvjc16aphrnm9k5pc-neovim-unwrapped-nightly"
+        "out": "/nix/store/9p0z5zpfxid33bzxa0ad2qxiwyacj59y-neovim-unwrapped-nightly"
       },
       "output-names": [
         "out"
@@ -1079,13 +1565,13 @@
     },
     {
       "install_id": "neovim-nightly",
-      "locked-url": "github:nix-community/neovim-nightly-overlay/00e7d4ab17e88a4c342555c18ad09faefb6f4901?narHash=sha256-2aW1xnaKgeV09jGHijD090F%2B6dHwE/LLxaVjcfYVsGQ%3D",
+      "locked-url": "github:nix-community/neovim-nightly-overlay/d5ef90cf4577df3e3daef7e070d200cca64c889f?narHash=sha256-87aML9i/zVm5WSCEx59PUpCrpkLbXEqcLEFPNn5%2B2iE%3D",
       "flake-description": "Neovim flake",
       "locked-flake-attr-path": "packages.x86_64-linux.default",
-      "derivation": "/nix/store/k4vlwvj37yqy1h39dnpkg73hfhlh2ywm-neovim-unwrapped-nightly.drv",
+      "derivation": "/nix/store/9ca7k961ra2paslaazfcrxsiknixrd5r-neovim-unwrapped-nightly.drv",
       "outputs": {
-        "debug": "/nix/store/ll9kscb3k9z7a4vp3p48mbwf3fxjjyl0-neovim-unwrapped-nightly-debug",
-        "out": "/nix/store/vyvqzfqxid0zh4wq2kk7fc4zbrdjd0yq-neovim-unwrapped-nightly"
+        "debug": "/nix/store/72i92pyzrq89s3fhfsiw928v4hd8cccl-neovim-unwrapped-nightly-debug",
+        "out": "/nix/store/k5dgz3b2whr1vd1akad6cw2wmy0fn54z-neovim-unwrapped-nightly"
       },
       "output-names": [
         "out",
