@@ -18,6 +18,9 @@
       "git": {
         "pkg-path": "git"
       },
+      "htop": {
+        "pkg-path": "htop"
+      },
       "jujutsu": {
         "pkg-path": "jujutsu"
       },
@@ -35,6 +38,9 @@
       },
       "ripgrep": {
         "pkg-path": "ripgrep"
+      },
+      "sensible": {
+        "pkg-path": "tmuxPlugins.sensible"
       },
       "tmux": {
         "pkg-path": "tmux"
@@ -652,6 +658,122 @@
       "priority": 5
     },
     {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/fziybn3rshnva107r7dgn1l2cpmf9l81-htop-3.4.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "htop-3.4.1",
+      "pname": "htop",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T02:58:59.100680Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.4.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/c4wvk0vq7ysp7lsz67416jxjbfafcib7-htop-3.4.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/b18z7jymva5syp0mdv6a00qq0x17xqvn-htop-3.4.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "htop-3.4.1",
+      "pname": "htop",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:28:06.817870Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.4.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/3z58y596qsba2gv9h1ijrdsrdrk593w2-htop-3.4.1"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/lg2c0jf3smipvg4d1xmsjp2vlv8g0pgi-htop-3.4.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "htop-3.4.1",
+      "pname": "htop",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:55:42.340724Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.4.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/vrfzlf1q1qn84yyj6d6cbkyiki3nvx3h-htop-3.4.1"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/5sqg28xsl9v4nr1bb9flfsjzixpdzidr-htop-3.4.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "htop-3.4.1",
+      "pname": "htop",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:26:57.944958Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.4.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/z1jl6vd5xa17ix5pm8b293zhvsmg619p-htop-3.4.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
       "attr_path": "jujutsu",
       "broken": false,
       "derivation": "/nix/store/y6vxzdq9kvxzcipnfspzzxcfcbml27rv-jujutsu-0.33.0.drv",
@@ -1226,6 +1348,114 @@
       ],
       "outputs": {
         "out": "/nix/store/5pv8jrp70w0flz9g3yqkk7fzcnr28mpx-ripgrep-14.1.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/hjq03hd9mwb420hmnvfvh48f721kqhkj-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:00:47.263387Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/dgl0ic85szlmy0l9xxa161h495qhb8wa-tmuxplugin-sensible-unstable-2022-08-14"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/a5vqf3n4cniqx6kk0z3zhki7j5qvm70b-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:30:33.982867Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/cv21yzqp86995p4z3rci8aimy22bam9l-tmuxplugin-sensible-unstable-2022-08-14"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/vannf5kkch54iqqv3hk6pm636bh5wjqb-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:57:38.811043Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/kdmfaf9bmmxcgxp8mcpsmsk95dafljc4-tmuxplugin-sensible-unstable-2022-08-14"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/imbp1hlwzzr5c0mwq3q3akly0fdbv312-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:29:45.394004Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/q8gh8nb0zxzy9c2ycmir02dk1dfxa29j-tmuxplugin-sensible-unstable-2022-08-14"
       },
       "system": "x86_64-linux",
       "group": "toplevel",

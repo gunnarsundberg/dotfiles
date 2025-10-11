@@ -21,18 +21,17 @@ gh.pkg-path = "gh"
 fzf.pkg-path = "fzf"
 nushell.pkg-path = "nushell"
 lazyjj.pkg-path = "lazyjj"
+zoxide.pkg-path = "zoxide"
+fd.pkg-path = "fd"
+tmux.pkg-path = "tmux"
+bat.pkg-path = "bat"
+htop.pkg-path = "htop"
 
 # nvim
 neovim-nightly.flake = "github:nix-community/neovim-nightly-overlay"
 lua-language-server.pkg-path = "lua-language-server"
 ripgrep.pkg-path = "ripgrep"
-zoxide.pkg-path = "zoxide"
-fd.pkg-path = "fd"
-tmux.pkg-path = "tmux"
-bat.pkg-path = "bat"
-
-# gum.pkg-path = "gum"
-# gum.version = "^0.14.5"
+sensible.pkg-path = "tmuxPlugins.sensible"
 
 
 ## Environment Variables ---------------------------------------------
