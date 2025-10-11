@@ -40,7 +40,8 @@ sensible.pkg-path = "tmuxPlugins.sensible"
 ## -------------------------------------------------------------------
 [vars]
 # INTRO_MESSAGE = "It's gettin' Flox in here"
-
+EDITOR = "nvim"
+VISUAL = "nvim"
 
 ## Activation Hook ---------------------------------------------------
 ##  ... run by _bash_ shell when you run 'flox activate'.

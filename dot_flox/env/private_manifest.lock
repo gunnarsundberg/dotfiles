@@ -49,6 +49,10 @@
         "pkg-path": "zoxide"
       }
     },
+    "vars": {
+      "EDITOR": "nvim",
+      "VISUAL": "nvim"
+    },
     "hook": {},
     "profile": {
       "fish": "  set PATH $PATH:$HOME/.local/bin\n\n  fzf --fish | source\n  zoxide init fish | source\n"
