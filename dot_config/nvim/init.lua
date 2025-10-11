@@ -19,6 +19,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
 })
 
 require "mini.pick".setup()

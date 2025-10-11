@@ -45,6 +45,12 @@
       "tmux": {
         "pkg-path": "tmux"
       },
+      "vim-tmux-navigator": {
+        "pkg-path": "tmuxPlugins.vim-tmux-navigator"
+      },
+      "yank": {
+        "pkg-path": "tmuxPlugins.yank"
+      },
       "zoxide": {
         "pkg-path": "zoxide"
       }
@@ -1584,6 +1590,222 @@
       "outputs": {
         "man": "/nix/store/pxl2q3i1i7slypcz6bpjmzqfv48d23ha-tmux-3.5a-man",
         "out": "/nix/store/3gzj3jqjnxqvaycas4z8z6y9bxa43a2z-tmux-3.5a"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.vim-tmux-navigator",
+      "broken": false,
+      "derivation": "/nix/store/q2fn1zf5my12x0441k52x25sna35pw2l-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15.drv",
+      "install_id": "vim-tmux-navigator",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-vim-tmux-navigator-unstable-2025-07-15",
+      "pname": "vim-tmux-navigator",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:00:47.323222Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2025-07-15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/yspmzmx2b84a3grm385f9mvq9s687qg0-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.vim-tmux-navigator",
+      "broken": false,
+      "derivation": "/nix/store/kv4lj1cygvnmxklkkqjpf7i16zn20bma-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15.drv",
+      "install_id": "vim-tmux-navigator",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-vim-tmux-navigator-unstable-2025-07-15",
+      "pname": "vim-tmux-navigator",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:30:34.052984Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2025-07-15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/b79n1pjbxxys5l1bid3d0khgydnjfxwv-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.vim-tmux-navigator",
+      "broken": false,
+      "derivation": "/nix/store/kcwf7zbp7g7y2cl6bqljsry0ss0zn5dj-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15.drv",
+      "install_id": "vim-tmux-navigator",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-vim-tmux-navigator-unstable-2025-07-15",
+      "pname": "vim-tmux-navigator",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:57:38.874911Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2025-07-15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/vrq48ppjylw2sn7c7vydj4dxiz0qdn7r-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.vim-tmux-navigator",
+      "broken": false,
+      "derivation": "/nix/store/xmn35b9w0s2ab0fl1pbp77l542h905fj-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15.drv",
+      "install_id": "vim-tmux-navigator",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-vim-tmux-navigator-unstable-2025-07-15",
+      "pname": "vim-tmux-navigator",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:29:45.468420Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2025-07-15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/695mxgcasc321iy6lrdlkfdirn3jf3jr-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/a4dcfvl1jsqrhsvg2bpdnzfnkbxijlvp-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:00:47.329356Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/jkfv97jah2cwzm3qyaxzqaj59v9qzy6b-tmuxplugin-yank-unstable-2023-07-19"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/mx4683nhddlqzg9y6dwx1q76sy13svcl-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:30:34.060313Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/s60dy845c9gkjwmw7z4bblk35xhwv387-tmuxplugin-yank-unstable-2023-07-19"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/6v4kp55jnx53mc5hxkqzvbaxhwznr8ax-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:57:38.881470Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/jp5r7psgmshlkyla178ds4a21x65zhfz-tmuxplugin-yank-unstable-2023-07-19"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/s4cwvlb1pqf67xs702vm13f332zy0g5z-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:29:45.476801Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/bq99sqvgnadh4pb7vcybyp64j8zracq9-tmuxplugin-yank-unstable-2023-07-19"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
