@@ -45,6 +45,9 @@
       "tmux": {
         "pkg-path": "tmux"
       },
+      "tree-sitter": {
+        "pkg-path": "tree-sitter"
+      },
       "vim-tmux-navigator": {
         "pkg-path": "tmuxPlugins.vim-tmux-navigator"
       },
@@ -1590,6 +1593,122 @@
       "outputs": {
         "man": "/nix/store/pxl2q3i1i7slypcz6bpjmzqfv48d23ha-tmux-3.5a-man",
         "out": "/nix/store/3gzj3jqjnxqvaycas4z8z6y9bxa43a2z-tmux-3.5a"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tree-sitter",
+      "broken": false,
+      "derivation": "/nix/store/h5zrpcma0ig530dasikga5wb2svlmrd4-tree-sitter-0.25.6.drv",
+      "description": "Parser generator tool and an incremental parsing library",
+      "install_id": "tree-sitter",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tree-sitter-0.25.6",
+      "pname": "tree-sitter",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:00:47.810569Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.6",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/94d521g569s9yjjdqfpwpdbzx885knvv-tree-sitter-0.25.6"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tree-sitter",
+      "broken": false,
+      "derivation": "/nix/store/qn4crjyahnyj86q7xmln028cpznbbfqa-tree-sitter-0.25.6.drv",
+      "description": "Parser generator tool and an incremental parsing library",
+      "install_id": "tree-sitter",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tree-sitter-0.25.6",
+      "pname": "tree-sitter",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:30:34.862394Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.6",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/lf8is5wgkdgrmjri1z6p9ccxiscs8iys-tree-sitter-0.25.6"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tree-sitter",
+      "broken": false,
+      "derivation": "/nix/store/gk8nll8914ql5izvdar0shm88i2dx2j9-tree-sitter-0.25.6.drv",
+      "description": "Parser generator tool and an incremental parsing library",
+      "install_id": "tree-sitter",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tree-sitter-0.25.6",
+      "pname": "tree-sitter",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:57:39.383154Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.6",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/4s2242qdis9bpfjiaj5sfdnkjjbq52f2-tree-sitter-0.25.6"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tree-sitter",
+      "broken": false,
+      "derivation": "/nix/store/i5bxi7v2vy3dghlazabx3lm1cws59qkb-tree-sitter-0.25.6.drv",
+      "description": "Parser generator tool and an incremental parsing library",
+      "install_id": "tree-sitter",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "tree-sitter-0.25.6",
+      "pname": "tree-sitter",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:29:46.420105Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.25.6",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ixb7pzkjklaakcgcb43xrlsqnrdbi1fz-tree-sitter-0.25.6"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
