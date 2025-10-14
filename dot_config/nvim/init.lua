@@ -25,7 +25,7 @@ vim.pack.add({
 require "mini.pick".setup()
 require "oil".setup()
 require "nvim-treesitter.configs".setup({
-	ensure_installed = {"go", "rust", "lua"},
+	ensure_installed = {"go", "rust", "lua", "jsonls"},
 	highlight = { enable = true }
 })
 
@@ -52,4 +52,4 @@ map('n', '<leader>e', ":Oil<CR>")
 --
 -- lsp
 --
-vim.lsp.enable({ "lua_ls", "gopls" })
+vim.lsp.enable({ "lua_ls", "gopls", "jsonls" })

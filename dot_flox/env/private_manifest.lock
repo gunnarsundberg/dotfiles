@@ -51,6 +51,9 @@
       "vim-tmux-navigator": {
         "pkg-path": "tmuxPlugins.vim-tmux-navigator"
       },
+      "vscode-json-languageserver": {
+        "pkg-path": "vscode-json-languageserver"
+      },
       "yank": {
         "pkg-path": "tmuxPlugins.yank"
       },
@@ -1817,6 +1820,122 @@
       ],
       "outputs": {
         "out": "/nix/store/695mxgcasc321iy6lrdlkfdirn3jf3jr-tmuxplugin-vim-tmux-navigator-unstable-2025-07-15"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "vscode-json-languageserver",
+      "broken": false,
+      "derivation": "/nix/store/7xa5mmhpq3ggx1hqikczwd0fdakqbp9m-vscode-json-languageserver-1.3.4.drv",
+      "description": "JSON language server",
+      "install_id": "vscode-json-languageserver",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "vscode-json-languageserver-1.3.4",
+      "pname": "vscode-json-languageserver",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:01:09.048905Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.3.4",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/d16jdsa1if4j20d3yhshf5d2kfpih1vq-vscode-json-languageserver-1.3.4"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "vscode-json-languageserver",
+      "broken": false,
+      "derivation": "/nix/store/gs2almh4kr18ckqx7i6iysdmh1lh8j83-vscode-json-languageserver-1.3.4.drv",
+      "description": "JSON language server",
+      "install_id": "vscode-json-languageserver",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "vscode-json-languageserver-1.3.4",
+      "pname": "vscode-json-languageserver",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:31:00.416164Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.3.4",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/467pwfghc3jbx2rz4pgcc8ij89rdkmj6-vscode-json-languageserver-1.3.4"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "vscode-json-languageserver",
+      "broken": false,
+      "derivation": "/nix/store/jqh3rlw4q6lg4fx16ywjywgi6rcgp873-vscode-json-languageserver-1.3.4.drv",
+      "description": "JSON language server",
+      "install_id": "vscode-json-languageserver",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "vscode-json-languageserver-1.3.4",
+      "pname": "vscode-json-languageserver",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T03:58:01.849392Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.3.4",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/aip6gnv79qb426gfw3zmyspg4a5kfk6p-vscode-json-languageserver-1.3.4"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "vscode-json-languageserver",
+      "broken": false,
+      "derivation": "/nix/store/nc0bjb2q2dhzpxalr1yhwcwmws22aalv-vscode-json-languageserver-1.3.4.drv",
+      "description": "JSON language server",
+      "install_id": "vscode-json-languageserver",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "name": "vscode-json-languageserver-1.3.4",
+      "pname": "vscode-json-languageserver",
+      "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
+      "rev_count": 864611,
+      "rev_date": "2025-09-21T03:59:47Z",
+      "scrape_date": "2025-09-24T04:30:15.425944Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.3.4",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/nqq21471ys4kmx8ciqiighia0nqvvhvs-vscode-json-languageserver-1.3.4"
       },
       "system": "x86_64-linux",
       "group": "toplevel",

@@ -37,6 +37,7 @@ sensible.pkg-path = "tmuxPlugins.sensible"
 vim-tmux-navigator.pkg-path = "tmuxPlugins.vim-tmux-navigator"
 yank.pkg-path = "tmuxPlugins.yank"
 tree-sitter.pkg-path = "tree-sitter"
+vscode-json-languageserver.pkg-path = "vscode-json-languageserver"
 
 
 ## Environment Variables ---------------------------------------------
