@@ -63,11 +63,12 @@
     },
     "vars": {
       "EDITOR": "nvim",
+      "PATH": "$PATH:$HOME/.local/bin",
       "VISUAL": "nvim"
     },
     "hook": {},
     "profile": {
-      "fish": "  set PATH $PATH:$HOME/.local/bin\n\n  fzf --fish | source\n  zoxide init fish | source\n"
+      "fish": "\n  fzf --fish | source\n  zoxide init fish | source\n"
     },
     "options": {
       "systems": [

@@ -25,7 +25,7 @@ vim.pack.add({
 require "mini.pick".setup()
 require "oil".setup()
 require "nvim-treesitter.configs".setup({
-	ensure_installed = {"go", "rust", "lua", "jsonls"},
+	ensure_installed = {"go", "rust", "lua", "json"},
 	highlight = { enable = true }
 })
 

@@ -30,14 +30,14 @@ htop.pkg-path = "htop"
 neovim-nightly.flake = "github:nix-community/neovim-nightly-overlay"
 lua-language-server.pkg-path = "lua-language-server"
 ripgrep.pkg-path = "ripgrep"
+tree-sitter.pkg-path = "tree-sitter"
+vscode-json-languageserver.pkg-path = "vscode-json-languageserver"
 
 # tmux
 tmux.pkg-path = "tmux"
 sensible.pkg-path = "tmuxPlugins.sensible"
 vim-tmux-navigator.pkg-path = "tmuxPlugins.vim-tmux-navigator"
 yank.pkg-path = "tmuxPlugins.yank"
-tree-sitter.pkg-path = "tree-sitter"
-vscode-json-languageserver.pkg-path = "vscode-json-languageserver"
 
 
 ## Environment Variables ---------------------------------------------
@@ -48,6 +48,8 @@ vscode-json-languageserver.pkg-path = "vscode-json-languageserver"
 # INTRO_MESSAGE = "It's gettin' Flox in here"
 EDITOR = "nvim"
 VISUAL = "nvim"
+
+PATH = "$PATH:$HOME/.local/bin"
 
 ## Activation Hook ---------------------------------------------------
 ##  ... run by _bash_ shell when you run 'flox activate'.
@@ -78,7 +80,6 @@ VISUAL = "nvim"
 # zsh  = ...
 # fish = ...
 fish = '''
-  set PATH $PATH:$HOME/.local/bin
 
   fzf --fish | source
   zoxide init fish | source
