@@ -25,13 +25,8 @@ in
     htop
     jujutsu
     gh
-    lazyjj
-    nushell
     tree-sitter
     lua-language-server
-    vscode-langservers-extracted
-		gopls
-    templ
   ];
 
   home.sessionVariables = {
