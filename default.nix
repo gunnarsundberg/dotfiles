@@ -31,8 +31,6 @@ in
     htop
     jujutsu
     gh
-    lazyjj
-    nushell
 
     # neovim ecosystem
     tree-sitter

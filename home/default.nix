@@ -30,6 +30,8 @@ in
     tree-sitter
     lua-language-server
     vscode-langservers-extracted
+		gopls
+    templ
   ];
 
   home.sessionVariables = {

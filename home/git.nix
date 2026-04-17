@@ -9,8 +9,8 @@ in
     userName = "Gunnar Sundberg";
     userEmail =
       if isWork
-      then "gunnar@work.com"
-      else "gunnar@personal.com";
+      then "gunnar.sundberg@fastly.com"
+      else "gunnarsundberg@pm.me";
     extraConfig = {
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
