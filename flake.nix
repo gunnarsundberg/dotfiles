@@ -30,7 +30,25 @@
           home-manager.backupFileExtension = "backup";
           home-manager.users.gunnar = import ./home;
           home-manager.extraSpecialArgs = {
-            profile = "personal";   # swap to "work" for a work machine
+            profile = "personal";
+          };
+        }
+      ];
+    };
+
+    darwinConfigurations."C7FMV7W2R0" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./hosts/darwin-common.nix
+        ./hosts/macbook-work.nix
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
+          home-manager.users.gunnar = import ./home;
+          home-manager.extraSpecialArgs = {
+            profile = "work";
           };
         }
       ];
