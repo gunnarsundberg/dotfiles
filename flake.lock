@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "forgecode": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1776685689,
+        "narHash": "sha256-/67Mr2Z3yxaO5P8Q6WfvX9OIrvvOn57zGLx27TdYd2o=",
+        "owner": "tailcallhq",
+        "repo": "forgecode",
+        "rev": "acd9af5308c8038ee98df084012afe732f376eb6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tailcallhq",
+        "repo": "forgecode",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -42,6 +60,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1773282481,
+        "narHash": "sha256-b/GV2ysM8mKHhinse2wz+uP37epUrSE+sAKXy/xvBY4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fe416aaedd397cacb33a610b33d60ff2b431b127",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1776255774,
         "narHash": "sha256-psVTpH6PK3q1htMJpmdz1hLF5pQgEshu7gQWgKO6t6Y=",
         "owner": "NixOS",
@@ -58,9 +92,10 @@
     },
     "root": {
       "inputs": {
+        "forgecode": "forgecode",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

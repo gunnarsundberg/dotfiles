@@ -13,9 +13,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+		forgecode = {
+      url = "github:tailcallhq/forgecode";
+		};
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, ... }:
+  outputs = { self, nixpkgs, nix-darwin, home-manager, forgecode, ... }:
   {
     # ── macOS (nix-darwin) ─────────────────────────────────────────────
     darwinConfigurations."Gunnars-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -31,6 +35,7 @@
           home-manager.users.gunnar = import ./home;
           home-manager.extraSpecialArgs = {
             profile = "personal";
+						inherit forgecode;
           };
         }
       ];
@@ -49,6 +54,7 @@
           home-manager.users.gunnar = import ./home;
           home-manager.extraSpecialArgs = {
             profile = "work";
+						inherit forgecode;
           };
         }
       ];

@@ -1,4 +1,4 @@
-{ pkgs, lib, profile, ... }:
+{ pkgs, lib, profile, forgecode, ... }:
 
 let
   isWork = profile == "work";
@@ -27,7 +27,9 @@ in
     gh
     tree-sitter
     lua-language-server
-  ];
+  ] ++ lib.optionals (!isServer) [
+		forgecode.packages.${pkgs.system}.default
+	];
 
   home.sessionVariables = {
     EDITOR = "nvim";
