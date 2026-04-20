@@ -45,6 +45,8 @@
 
   # Set default shell
   programs.fish.enable = true;
+  environment.shells = [ pkgs.fish ];
+  users.users.gunnar.shell = pkgs.fish;
 
   system.stateVersion = 6;
 }
