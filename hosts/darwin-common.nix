@@ -5,9 +5,12 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
+  environment.shells = [ pkgs.fish ];
   environment.systemPackages = with pkgs; [
     git
   ];
+
+  users.users.gunnar.shell = pkgs.fish;
 
   homebrew = {
     enable = true;
