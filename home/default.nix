@@ -42,5 +42,12 @@ in
     '';
   };
 
-  programs.home-manager.enable = true;
+	programs = {
+		home-manager.enable = true;
+		direnv = {
+			enable = true;
+			enableFishIntegration = true;
+			nix-direnv.enable = true;
+		};
+	};
 }
