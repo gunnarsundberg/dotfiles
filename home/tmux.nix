@@ -3,11 +3,10 @@
 {
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.fish}/bin/fish";
     prefix = "C-Space";
     baseIndex = 1;
     mouse = true;
-    terminal = "xterm-256color";
+    terminal = "tmux-256color";
     escapeTime = 0;
 
     plugins = with pkgs.tmuxPlugins; [

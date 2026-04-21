@@ -1,4 +1,4 @@
-{ pkgs, lib, profile, forgecode, ... }:
+{ pkgs, lib, profile, forgecode, direnv-instant, ... }:
 
 let
   isWork = profile == "work";
@@ -10,11 +10,12 @@ in
     ./git.nix
     ./tmux.nix
     ./neovim.nix
+		direnv-instant.homeModules.direnv-instant
   ];
 
   home.username = "gunnar";
   home.homeDirectory = lib.mkForce "/Users/gunnar";
-  home.stateVersion = "24.11";
+  home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
     fzf
@@ -46,8 +47,12 @@ in
 		home-manager.enable = true;
 		direnv = {
 			enable = true;
-			enableFishIntegration = true;
+			enableFishIntegration = false;
 			nix-direnv.enable = true;
+		};
+		direnv-instant = {
+			enable = true;
+			enableFishIntegration = true;
 		};
 	};
 }

@@ -17,9 +17,11 @@
 		forgecode = {
       url = "github:tailcallhq/forgecode";
 		};
+    
+		direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, forgecode, ... }:
+  outputs = { self, nixpkgs, nix-darwin, home-manager, forgecode, direnv-instant, ... }:
   {
     # ── macOS (nix-darwin) ─────────────────────────────────────────────
     darwinConfigurations."Gunnars-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -36,6 +38,7 @@
           home-manager.extraSpecialArgs = {
             profile = "personal";
 						inherit forgecode;
+						inherit direnv-instant;
           };
         }
       ];
@@ -55,6 +58,7 @@
           home-manager.extraSpecialArgs = {
             profile = "work";
 						inherit forgecode;
+						inherit direnv-instant;
           };
         }
       ];
