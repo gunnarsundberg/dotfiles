@@ -17,11 +17,15 @@
 		forgecode = {
       url = "github:tailcallhq/forgecode";
 		};
+
+		forgecode-sso = {
+			url = "github:tailcallhq/forgecode/937ac6ef5b4f9668472c25f074a198f4149e41e2";
+		};
     
 		direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, forgecode, direnv-instant, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }:
   {
     # ── macOS (nix-darwin) ─────────────────────────────────────────────
     darwinConfigurations."Gunnars-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -37,8 +41,7 @@
           home-manager.users.gunnar = import ./home;
           home-manager.extraSpecialArgs = {
             profile = "personal";
-						inherit forgecode;
-						inherit direnv-instant;
+						inherit inputs;
           };
         }
       ];
@@ -57,8 +60,7 @@
           home-manager.users.gunnar = import ./home;
           home-manager.extraSpecialArgs = {
             profile = "work";
-						inherit forgecode;
-						inherit direnv-instant;
+						inherit inputs;
           };
         }
       ];

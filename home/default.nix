@@ -1,4 +1,4 @@
-{ pkgs, lib, profile, forgecode, direnv-instant, ... }:
+{ pkgs, lib, profile, inputs, ... }:
 
 let
   isWork = profile == "work";
@@ -10,7 +10,7 @@ in
     ./git.nix
     ./tmux.nix
     ./neovim.nix
-		direnv-instant.homeModules.direnv-instant
+		inputs.direnv-instant.homeModules.direnv-instant
   ];
 
   home.username = "gunnar";
@@ -28,8 +28,10 @@ in
     gh
     tree-sitter
     lua-language-server
-  ] ++ lib.optionals (!isServer) [
-		forgecode.packages.${pkgs.system}.default
+  ] ++ lib.optionals (!isWork) [
+		inputs.forgecode.packages.${pkgs.system}.default
+	] ++ lib.optionals isWork [
+		inputs.forgecode-sso.packages.${pkgs.system}.default
 	];
 
   home.sessionVariables = {
