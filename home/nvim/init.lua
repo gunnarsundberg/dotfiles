@@ -14,23 +14,6 @@ vim.o.smartindent = true
 --
 -- plugins
 --
-vim.pack.add({
-	{ src = "https://github.com/gabfelix/mudworld" },
-	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-mini/mini.pick" },
-	{ src = "https://github.com/nvim-mini/mini.completion" },
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "main",
-	},
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-		version = "main",
-	},
-	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
-	{ src = "https://github.com/mrcjkb/rustaceanvim" },
-	{ src = "https://github.com/evanphx/jjsigns.nvim" },
-})
 
 require "mini.pick".setup()
 require "mini.completion".setup()
@@ -98,7 +81,7 @@ end)
 --
 -- vibes
 --
-vim.cmd("colorscheme mudworld")
+vim.cmd("colorscheme gruvbox-material")
 vim.o.winborder = "rounded"
 
 --
