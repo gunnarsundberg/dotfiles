@@ -3,27 +3,25 @@
 {
   programs.git = {
     enable = true;
-    userName  = "Gunnar Sundberg";
-    userEmail = "gunnarsundberg@pm.me";
-    extraConfig = {
+    settings = {
+      user.name  = "Gunnar Sundberg";
+      user.email = "gunnarsundberg@pm.me";
       init.defaultBranch = "main";
       push = {
         autoSetupRemote = true;
         default = "current";
       };
       pull.rebase = true;
-    };
-    ignores = [ ];
-    settings = {
       url = {
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
         };
       };
     };
+    ignores = [ ];
     signing = {
-      format      = "ssh";
-      key         = "";
+      format        = "ssh";
+      key           = "";
       signByDefault = true;
       signer =
         if pkgs.stdenv.isDarwin
