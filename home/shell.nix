@@ -5,6 +5,11 @@
     enable = true;
     interactiveShellInit = ''
       fish_vi_key_bindings
+
+      # add brews to PATH
+			if test -x /opt/homebrew/bin/brew
+				/opt/homebrew/bin/brew shellenv | source
+			end
     '';
 		
 		plugins = [

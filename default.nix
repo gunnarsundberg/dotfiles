@@ -18,7 +18,7 @@ in
     then "/Users/gunnar"
     else "/home/gunnar";
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "26.05";
 
   # ── Packages (replaces your flox manifest.toml) ──────────────────────
   home.packages = with pkgs; [
