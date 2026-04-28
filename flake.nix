@@ -14,19 +14,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		forgecode = {
+    forgecode = {
       url = "github:tailcallhq/forgecode";
-		};
+    };
 
-		forgecode-sso = {
-			url = "github:tailcallhq/forgecode/937ac6ef5b4f9668472c25f074a198f4149e41e2";
-		};
-    
-		direnv-instant.url = "github:Mic92/direnv-instant";
+    direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }:
+  let
+    supportedSystems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+  in
   {
+    # ── Reusable modules (consumed by work-dotfiles) ───────────────────
+    darwinModules.common = ./hosts/darwin-common.nix;
+    homeModules.base     = ./home;
+
     # ── macOS (nix-darwin) ─────────────────────────────────────────────
     darwinConfigurations."Gunnars-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       system = "x86_64-darwin";
@@ -41,26 +45,7 @@
           home-manager.users.gunnar = import ./home;
           home-manager.extraSpecialArgs = {
             profile = "personal";
-						inherit inputs;
-          };
-        }
-      ];
-    };
-
-    darwinConfigurations."C7FMV7W2R0" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./hosts/darwin-common.nix
-        ./hosts/macbook-work.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "backup";
-          home-manager.users.gunnar = import ./home;
-          home-manager.extraSpecialArgs = {
-            profile = "work";
-						inherit inputs;
+            inherit inputs;
           };
         }
       ];
@@ -84,5 +69,15 @@
     #     }
     #   ];
     # };
+
+    # ── Base dev shells (composable via inputsFrom in work-dotfiles) ───
+    devShells = forAllSystems (system:
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        base-go     = import ./shells/base-go.nix     { inherit pkgs; };
+        base-rust   = import ./shells/base-rust.nix   { inherit pkgs; };
+        base-python = import ./shells/base-python.nix { inherit pkgs; };
+      }
+    );
   };
 }
