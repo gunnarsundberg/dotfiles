@@ -10,6 +10,7 @@ in
     ./tmux.nix
     ./neovim.nix
     inputs.direnv-instant.homeModules.direnv-instant
+		inputs.forgecode
   ];
 
   options = {
@@ -37,7 +38,7 @@ in
       gh
       tree-sitter
       lua-language-server
-      config.forge.package
+      forgecode.package
     ];
 
     home.sessionVariables = {

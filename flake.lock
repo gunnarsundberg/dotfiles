@@ -46,11 +46,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1776727107,
-        "narHash": "sha256-smnE9CNTq6gepFRRXbph7Hifv3a5KVPdeJbCXHTuHw4=",
+        "lastModified": 1778048738,
+        "narHash": "sha256-j1+k8XqJbXQacqSf7fV8uoh9iBIRPBFJuAGl374oAAc=",
         "owner": "tailcallhq",
         "repo": "forgecode",
-        "rev": "4e7659e73db686d1fbdcaf0d8ba0de60e4186937",
+        "rev": "7261cdb5e039218a371ea8dd376b55ac2e22e109",
         "type": "github"
       },
       "original": {
