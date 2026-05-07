@@ -10,11 +10,10 @@ in
     ./tmux.nix
     ./neovim.nix
     inputs.direnv-instant.homeModules.direnv-instant
-		inputs.forgecode
   ];
 
   options = {
-    forge.package = lib.mkOption {
+    forgecode.package = lib.mkOption {
       type        = lib.types.package;
       default     = inputs.forgecode.packages.${pkgs.system}.default;
       description = "The forge binary to install. Override in work-dotfiles with forgecode-sso.";
@@ -38,7 +37,7 @@ in
       gh
       tree-sitter
       lua-language-server
-      forgecode.package
+      config.forgecode.package
     ];
 
     home.sessionVariables = {
