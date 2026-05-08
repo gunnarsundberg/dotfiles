@@ -10,6 +10,7 @@ in
     ./tmux.nix
     ./neovim.nix
     inputs.direnv-instant.homeModules.direnv-instant
+    ./ai-agents.nix
   ];
 
   options = {
