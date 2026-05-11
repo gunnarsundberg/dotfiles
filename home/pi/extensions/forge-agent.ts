@@ -45,6 +45,7 @@ export default function (pi: ExtensionAPI) {
         const proc = spawn("forge", args, {
           cwd: workDir,
           env: process.env,
+          stdio: ["ignore", "pipe", "pipe"],
         });
 
         let stdout = "";
