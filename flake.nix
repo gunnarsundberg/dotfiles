@@ -23,7 +23,7 @@
     direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, devenv ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, devenv, ... }:
   let
     supportedSystems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
