@@ -2,7 +2,8 @@
   description = "Gunnar's system configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -18,6 +19,7 @@
 
     forgecode = {
       url = "github:tailcallhq/forgecode";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     direnv-instant.url = "github:Mic92/direnv-instant";
