@@ -23,6 +23,11 @@
     };
 
     direnv-instant.url = "github:Mic92/direnv-instant";
+
+		fenix = {
+  		url = "github:nix-community/fenix";
+  		inputs.nixpkgs.follows = "nixpkgs";
+		};
   };
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, devenv, ... }:
@@ -84,7 +89,10 @@
 						./shells/base-go.nix
 					];
 				};
-        base-rust   = import ./shells/base-rust.nix   { inherit pkgs; };
+        base-rust   = import ./shells/base-rust.nix   { 
+					inherit pkgs; 
+					fenix = inputs.fenix.packages.${system};
+				};
         base-python = import ./shells/base-python.nix { inherit pkgs; };
       }
     );
