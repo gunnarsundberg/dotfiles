@@ -18,7 +18,10 @@
         };
       };
     };
-    ignores = [ ];
+    ignores = [
+			".direnv"
+			".devenv"
+		];
     signing = {
       format        = "ssh";
       key           = "";

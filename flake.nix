@@ -14,6 +14,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+		devenv.url = "github:cachix/devenv";
+
     forgecode = {
       url = "github:tailcallhq/forgecode";
     };
@@ -21,7 +23,7 @@
     direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, devenv, ... }:
   let
     supportedSystems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -74,7 +76,12 @@
     devShells = forAllSystems (system:
       let pkgs = nixpkgs.legacyPackages.${system};
       in {
-        base-go     = import ./shells/base-go.nix     { inherit pkgs; };
+				go = devenv.lib.mkShell {
+					inherit inputs pkgs;
+					modules = [
+						./shells/base-go.nix
+					];
+				};
         base-rust   = import ./shells/base-rust.nix   { inherit pkgs; };
         base-python = import ./shells/base-python.nix { inherit pkgs; };
       }

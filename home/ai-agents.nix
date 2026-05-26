@@ -94,7 +94,7 @@ let
   #
   # Personal: Anthropic direct. Set ANTHROPIC_API_KEY in the shell.
   piSettings = {
-    defaultProvider = if isWork then "bedrock" else "anthropic";
+    defaultProvider = if isWork then "amazon-bedrock" else "anthropic";
     defaultModel    = if isWork
                         then "anthropic.claude-sonnet-4-6"
                         else "claude-sonnet-4-20250514";
@@ -102,7 +102,6 @@ let
     # Extensions, skills, and prompts are resolved at runtime from these paths.
     # xdg.configFile entries below place Nix-managed content here.
     extensions = [ "${config.xdg.configHome}/ai/pi/extensions" ];
-    skills     = [ "${config.xdg.configHome}/ai/pi/skills"     ];
     prompts    = [ "${config.xdg.configHome}/ai/pi/prompts"    ];
 
     enableInstallTelemetry = false;
@@ -138,6 +137,11 @@ lib.mkIf (!isServer) {
     # the --session-dir flag.
     PI_CODING_AGENT_SESSION_DIR =
       "${config.home.homeDirectory}/.pi/sessions";
+  } // lib.optionalAttrs isWork {
+    # Default AWS profile for the work machine. Pi uses this to authenticate
+    # with Amazon Bedrock via the SSO profile in ~/.aws/config.
+    # Override per-project with direnv: `export AWS_PROFILE=sigsci_prod`
+    AWS_PROFILE = "bedrock";
   };
 
   # ── Pi: settings.json ─────────────────────────────────────────────────────
@@ -145,20 +149,27 @@ lib.mkIf (!isServer) {
   # to write here — change settings in this file and run darwin-rebuild switch.
   home.file.".pi/agent/settings.json".text = builtins.toJSON piSettings;
 
-  # ── Pi: extensions, AGENTS.md ─────────────────────────────────────────────
+  # ── Pi: extensions ────────────────────────────────────────────────────────
   # Directory source creates a single symlink at the target path pointing to
   # the Nix store directory. Pi scans extensions/ for .ts files at startup.
   xdg.configFile = {
     "ai/pi/extensions".source = ./pi/extensions;
-    "ai/pi/AGENTS.md".source  = ./pi/AGENTS.md;
-    # Skills and prompts directories: populate by adding files to
-    # home/pi/skills/ and home/pi/prompts/ and re-running darwin-rebuild switch.
   };
 
-  # ── Forge: custom agents and commands ─────────────────────────────────────
-  # Individual symlinks within the existing mutable ~/.forge/ directory.
-  # ~/.forge/.forge.toml, .credentials.json, and .forge.db remain mutable.
+  # ── Pi: global context file and skills ───────────────────────────────────
+  # Pi auto-discovers ~/.pi/agent/AGENTS.md as the global context file and
+  # ~/.pi/agent/skills/ as a global skill directory. Individual home.file
+  # entries allow nix-config and work-dotfiles to each contribute skills
+  # without a directory-source conflict.
+  #
+  # Forge agents and commands are individual symlinks inside the existing
+  # mutable ~/.forge/ directory (credentials and history remain mutable).
   home.file = {
+    ".pi/agent/AGENTS.md".source = ./pi/AGENTS.md;
+
+    ".pi/agent/skills/search-tools/SKILL.md".source =
+      ./pi/skills/search-tools/SKILL.md;
+
     ".forge/agents/pi-delegate.md".source = ./forge/agents/pi-delegate.md;
     ".forge/commands/check.md".source     = ./forge/commands/check.md;
   };
@@ -167,5 +178,6 @@ lib.mkIf (!isServer) {
   home.activation.aiAgentDirs =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       run mkdir -p "${config.home.homeDirectory}/.pi/sessions"
+      run mkdir -p "${config.home.homeDirectory}/.pi/agent/skills"
     '';
 }

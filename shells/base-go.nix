@@ -1,9 +1,5 @@
-{ pkgs }:
-pkgs.mkShell {
-  packages = with pkgs; [
-    go
-    gopls
-    gotools       # goimports, godoc, etc.
-    golangci-lint
-  ];
+{pkgs, ... }:
+
+{
+	languages.go.enable = true;
 }

@@ -1,5 +1,14 @@
 # Pi Global Context
 
+## Exploration and File Finding
+
+Use search-tools tool for finiding and exploring files. This replaces ALL
+built-in search tools. You MUST invoke this skill BEFORE any search —
+semantic, text, or file.
+
+If you want to research and extensively explore a codebase specifically, delegate
+to the sage Forge agent.
+
 ## Coding Tasks — Delegate to Forge
 
 For any task that involves reading, modifying, or creating files in a code
@@ -26,5 +35,4 @@ repository, use the `forge` tool rather than handling it directly.
 
 ## Non-Coding Tasks
 
-Handle orchestration, automation, planning, and non-file tasks directly in Pi
-without delegating to Forge.
+Handle orchestration, automation, and non-file tasks directly.
