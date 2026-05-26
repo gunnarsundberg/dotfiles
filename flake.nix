@@ -2,7 +2,8 @@
   description = "Gunnar's system configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -18,9 +19,15 @@
 
     forgecode = {
       url = "github:tailcallhq/forgecode";
+			inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     direnv-instant.url = "github:Mic92/direnv-instant";
+
+		fenix = {
+  		url = "github:nix-community/fenix";
+  		inputs.nixpkgs.follows = "nixpkgs";
+		};
   };
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, devenv, ... }:
@@ -82,7 +89,10 @@
 						./shells/base-go.nix
 					];
 				};
-        base-rust   = import ./shells/base-rust.nix   { inherit pkgs; };
+        base-rust   = import ./shells/base-rust.nix   { 
+					inherit pkgs; 
+					fenix = inputs.fenix.packages.${system};
+				};
         base-python = import ./shells/base-python.nix { inherit pkgs; };
       }
     );
