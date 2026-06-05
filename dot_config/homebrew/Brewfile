@@ -23,4 +23,4 @@ brew "k9s"
 
 cask "ghostty"
 cask "raycast"
-cask "font-meslolg-nerd-font”
+cask "font-meslolg-nerd-font"
