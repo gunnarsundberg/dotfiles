@@ -1,0 +1,26 @@
+tap "homebrew/cask-fonts"
+tap "homebrew/core"
+tap "homebrew/cask"
+tap "protonpass/tap"
+
+brew "fish"
+brew "tmux"
+brew "neovim"
+brew "git"
+brew "jujutsu"
+brew "gh"
+brew "fzf"
+brew "zoxide"
+brew "eza"
+brew "ripgrep"
+brew "fd"
+brew "bat"
+brew "pass-cli"
+
+brew "rustup"
+
+brew "k9s"
+
+cask "ghostty"
+cask "raycast"
+cask "font-meslolg-nerd-font”
