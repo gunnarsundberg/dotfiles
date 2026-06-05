@@ -1,6 +1,4 @@
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
-tap "homebrew/cask"
 tap "protonpass/tap"
 
 brew "fish"
