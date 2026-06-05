@@ -4,9 +4,6 @@
 [gpg]
 	format = "ssh"
 
-[gpg "ssh"]
-	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-
 [init]
 	defaultBranch = "main"
 
@@ -26,4 +23,4 @@
 [user]
 	email = "gunnarsundberg@pm.me"
 	name = "Gunnar Sundberg"
-	signingKey = ""
+	signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPOVLPzu2amXyi+TpcbT64ochsZJ0SLvO2QRvtT9hazH"
