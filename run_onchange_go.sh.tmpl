@@ -1,0 +1,15 @@
+#!/bin/sh
+GO_VERSION="1.26.4"
+PLATFORM="{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+TARBALL="go${GO_VERSION}.${PLATFORM}.tar.gz"
+INSTALL_DIR="{{ .chezmoi.homeDir }}/.local"
+
+if "{{ .chezmoi.homeDir }}/.local/go/bin/go" version 2>/dev/null | grep -q "go${GO_VERSION}"; then
+  echo "Go ${GO_VERSION} already installed, skipping"
+  exit 0
+fi
+
+curl -fsSL -O "https://go.dev/dl/${TARBALL}"
+rm -rf "$INSTALL_DIR/go"
+tar -C "$INSTALL_DIR" -xzf "$TARBALL"
+rm "$TARBALL"
