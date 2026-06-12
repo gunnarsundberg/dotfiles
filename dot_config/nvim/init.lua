@@ -14,6 +14,15 @@ vim.o.smartindent = true
 --
 -- plugins
 --
+vim.pack.add({
+	'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
+	'https://github.com/stevearc/oil.nvim',
+	'https://github.com/nvim-mini/mini.pick',
+	'https://github.com/nvim-mini/mini.completion',
+	'https://github.com/evanphx/jjsigns.nvim',
+	-- theme
+	'https://github.com/vimcolorschemes/olive-crt.nvim'
+})
 
 require "mini.pick".setup()
 require "mini.completion".setup()
@@ -81,7 +90,7 @@ end)
 --
 -- vibes
 --
-vim.cmd("colorscheme gruvbox-material")
+vim.cmd("colorscheme olive-crt")
 vim.o.winborder = "rounded"
 
 --
