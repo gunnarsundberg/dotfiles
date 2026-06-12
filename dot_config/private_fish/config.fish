@@ -10,6 +10,8 @@ status is-interactive; and begin
         /opt/homebrew/bin/brew shellenv | source
     end
 
+    set -x SSH_AUTH_SOCK /Users/gunnar/.ssh/proton-pass-agent.sock
+
     # Tide prompt defaults — only applied on first install (no prior tide config present).
     # To re-apply on an existing machine, run: set -e tide_left_prompt_items; exec fish
     if not set -q tide_left_prompt_items
