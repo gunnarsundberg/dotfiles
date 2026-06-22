@@ -1,4 +1,4 @@
 #!/bin/bash
-# Brewfile hash: {{ include "dot_config/homebrew/Brewfile" | sha256sum }}
+# Brewfile hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
 brew bundle --file="{{ .chezmoi.homeDir }}/.config/homebrew/Brewfile"
 curl -fsSL https://pi.dev/install.sh | sh

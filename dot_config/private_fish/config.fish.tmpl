@@ -10,7 +10,7 @@ status is-interactive; and begin
         /opt/homebrew/bin/brew shellenv | source
     end
 
-{{- if eq .chezmoi.role "personal" }}
+{{- if eq .role "personal" }}
     set -x SSH_AUTH_SOCK /Users/gunnar/.ssh/proton-pass-agent.sock
 {{- end }}
 
