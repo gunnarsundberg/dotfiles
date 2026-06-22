@@ -1,6 +1,12 @@
 tap "homebrew/cask-fonts"
+{{- if eq .chezmoi.role "personal" }}
 tap "protonpass/tap"
 
+brew "pass-cli"
+{{- end }}
+{{- if eq .chezmoi.role "work" }}
+brew "infra"
+{{- end }}
 brew "fish"
 brew "tmux"
 brew "neovim"
@@ -13,12 +19,19 @@ brew "eza"
 brew "ripgrep"
 brew "fd"
 brew "bat"
-brew "pass-cli"
 
 brew "rustup"
 
 brew "k9s"
+{{- if eq .chezmoi.role "work" }}
+brew "infra"
+{{- end }}
 
 cask "ghostty"
 cask "raycast"
 cask "font-meslo-lg-nerd-font"
+{{- if eq .chezmoi.role "work" }}
+cask "1password"
+cask "1password-cli"
+{{- end }}
+
