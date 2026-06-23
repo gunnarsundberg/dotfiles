@@ -1,8 +1,11 @@
 tap "homebrew/cask-fonts"
 {{- if eq .role "personal" }}
 tap "protonpass/tap"
-brew "pass-cli"
 {{- end }}
+{{- if eq .role "work" }}
+tap "infrahq/tap"
+{{- end }}
+
 brew "fish"
 brew "fnm"
 brew "tmux"
@@ -16,24 +19,25 @@ brew "eza"
 brew "ripgrep"
 brew "fd"
 brew "bat"
+{{- if eq .role "personal" }}
+brew "pass-cli"
+{{- end }}
 {{- if eq .role "work" }}
 brew "vault-cli"
+brew "container"
 {{- end }}
 
 brew "rustup"
 
 brew "k9s"
 {{- if eq .role "work" }}
-tap "infrahq/tap"
 brew "infra"
 {{- end }}
 
 cask "ghostty"
 cask "raycast"
-cask "font-meslo-lg-nerd-font"
 {{- if eq .role "work" }}
 cask "1password"
 cask "1password-cli"
 cask "gcloud-cli"
 {{- end }}
-
