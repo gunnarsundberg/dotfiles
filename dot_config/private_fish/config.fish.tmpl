@@ -15,7 +15,7 @@ status is-interactive; and begin
 {{- if eq .role "personal" }}
     set -x SSH_AUTH_SOCK /Users/gunnar/.ssh/proton-pass-agent.sock
 {{- end }}
-{{- if .role "work" }}
+{{- if eq .role "work" }}
 		# Added by eng-bootstrap 2026-06-22 18:51:01
 		export KITCHEN_LOCAL_YAML=.kitchen.gce.yml
 
