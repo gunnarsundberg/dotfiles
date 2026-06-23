@@ -1,13 +1,13 @@
 tap "homebrew/cask-fonts"
 {{- if eq .role "personal" }}
 tap "protonpass/tap"
-
 brew "pass-cli"
 {{- end }}
 {{- if eq .role "work" }}
-brew "infra"
+brew "gcloud"
 {{- end }}
 brew "fish"
+brew "fnm"
 brew "tmux"
 brew "neovim"
 brew "git"
@@ -24,6 +24,7 @@ brew "rustup"
 
 brew "k9s"
 {{- if eq .role "work" }}
+tap "infrahq/tap"
 brew "infra"
 {{- end }}
 
