@@ -3,9 +3,6 @@ tap "homebrew/cask-fonts"
 tap "protonpass/tap"
 brew "pass-cli"
 {{- end }}
-{{- if eq .role "work" }}
-brew "gcloud"
-{{- end }}
 brew "fish"
 brew "fnm"
 brew "tmux"
@@ -34,5 +31,6 @@ cask "font-meslo-lg-nerd-font"
 {{- if eq .role "work" }}
 cask "1password"
 cask "1password-cli"
+cask "gcloud-cli"
 {{- end }}
 
