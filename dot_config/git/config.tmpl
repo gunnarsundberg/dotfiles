@@ -1,0 +1,40 @@
+[branch]
+	autosetuprebase = always
+
+[commit]
+	gpgSign = true
+
+[gpg]
+	format = "ssh"
+{{- if eq .role "work" }}
+
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- end }}
+
+[init]
+	defaultBranch = "main"
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = "current"
+
+[tag]
+	gpgSign = true
+
+[url "ssh://git@github.com/"]
+	insteadOf = "https://github.com/"
+{{- if eq .role "work" }}
+[url "git@github.com:fastly"]
+	insteadof = https://github.com/fastly
+[url "git@github.com:signalsciences"]
+	insteadof = https://github.com/signalsciences
+{{- end }}
+
+[user]
+	email = {{- .email | quote }} 
+	name = "Gunnar Sundberg"
+	signingKey = {{- .git.signingkey | quote }}
