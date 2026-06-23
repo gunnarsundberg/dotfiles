@@ -1,9 +1,9 @@
-tap "homebrew/cask-fonts"
+tap "yoanbernabeu/tap", trusted: true
 {{- if eq .role "personal" }}
-tap "protonpass/tap"
+tap "protonpass/tap", trusted: true
 {{- end }}
 {{- if eq .role "work" }}
-tap "infrahq/tap"
+tap "infrahq/tap", trusted: true
 {{- end }}
 
 brew "fish"
@@ -19,6 +19,7 @@ brew "eza"
 brew "ripgrep"
 brew "fd"
 brew "bat"
+brew "grepai"
 {{- if eq .role "personal" }}
 brew "pass-cli"
 {{- end }}
