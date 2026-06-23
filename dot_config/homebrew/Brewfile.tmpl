@@ -16,6 +16,10 @@ brew "eza"
 brew "ripgrep"
 brew "fd"
 brew "bat"
+{{- if eq .role "work" }}
+brew "dagger"
+brew "vault-cli"
+{{- end }}
 
 brew "rustup"
 
