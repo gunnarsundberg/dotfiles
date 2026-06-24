@@ -3,9 +3,11 @@ status is-login; and begin
 end
 
 status is-interactive; and begin
-    fish_vi_key_bindings
-
 		set -x HOMEBREW_NO_ANALYTICS 1
+
+		# Added by LM Studio CLI (lms)
+		set -gx PATH $PATH /Users/gunnar/.lmstudio/bin
+		# End of LM Studio CLI section
 
     # add brews to PATH
     if test -x /opt/homebrew/bin/brew
