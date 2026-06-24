@@ -1,7 +1,17 @@
 #!/bin/bash
 # Brewfile hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
 brew bundle --file="{{ .chezmoi.homeDir }}/.config/homebrew/Brewfile"
+
 {{- if eq .role "work" }}
-curl -fsSL https://dl.dagger.io/dagger/install.sh | DAGGER_VERSION=0.20.3 BIN_DIR=/usr/local/bin sh
+# --- Dagger ---
+if ! command -v dagger &> /dev/null; then
+    echo "Installing Dagger..."
+    curl -fsSL https://dl.dagger.io/dagger/install.sh | DAGGER_VERSION=0.20.3 BIN_DIR=/usr/local/bin sh
+fi
 {{- end }}
-curl -fsSL https://pi.dev/install.sh | sh
+
+# --- Pi ---
+if ! command -v pi &> /dev/null; then
+    echo "Installing Pi..."
+    curl -fsSL https://pi.dev/install.sh | sh
+fi
