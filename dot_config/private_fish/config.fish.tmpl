@@ -19,6 +19,7 @@ status is-interactive; and begin
 {{- end }}
 {{- if eq .role "work" }}
 		set -x AWS_PROFILE bedrock
+		set -x INFRA_SKIP_VERSION_CHECK true
 
 		# Added by eng-bootstrap 2026-06-22 18:51:01
 		set -x KITCHEN_LOCAL_YAML .kitchen.gce.yml
