@@ -4,11 +4,13 @@
     "extensions": [
       "./forge-agent.ts",
       "./node_modules/pi-mcp-adapter",
-			"./node_modules/pi-web-access"
+			"./node_modules/pi-web-access",
+			"./node_modules/pi-subagents"
     ]
   },
   "dependencies": {
     "pi-mcp-adapter": "^2.4.0",
-		"pi-web-access": "^0.10.0"
+		"pi-web-access": "^0.10.0",
+		"pi-subagents": "^0.30.0"
   }
 }
