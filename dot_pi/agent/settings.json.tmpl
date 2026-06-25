@@ -1,0 +1,22 @@
+{
+  "compaction": {
+    "enabled": true,
+    "keepRecentTokens": 20000,
+    "reserveTokens": 16384
+  },
+  "defaultModel": "global.anthropic.claude-sonnet-4-6",
+  "defaultProvider": "amazon-bedrock",
+  "enableInstallTelemetry": false,
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3
+  },
+  "lastChangelogVersion": "0.80.2",
+  "theme": "dark",
+  "packages": [
+		{{- if eq .role "work" }}
+    "git:github.com/fastly/agent-skills-internal",
+		{{- end }}
+    "git:github.com/obra/superpowers"
+  ]
+}
