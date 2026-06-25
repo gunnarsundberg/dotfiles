@@ -20,6 +20,7 @@ brew "ripgrep"
 brew "fd"
 brew "bat"
 brew "grepai"
+brew "crit"
 {{- if eq .role "personal" }}
 brew "pass-cli"
 {{- end }}
@@ -34,6 +35,7 @@ brew "infra"
 {{- end }}
 
 cask "ghostty"
+cask "cmux"
 cask "raycast"
 cask "lm-studio"
 {{- if eq .role "work" }}
