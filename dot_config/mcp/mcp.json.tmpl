@@ -1,12 +1,17 @@
 {
   "mcpServers": {
+		{{- if eq .role "work" }},
+		"atlassian": {
+      "url": "https://mcp.atlassian.com/v1/mcp"
+    },
+		{{- end }}
     "chrome-devtools": {
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp@latest"]
-    }{{- if eq .role "work" }},
-		"atlassian": {
-      "url": "https://mcp.atlassian.com/v1/mcp"
+    },
+		"grepai": {
+      "command": "grepai",
+      "args": ["mcp-serve"]
     }
-		{{- end }}
   }
 }
