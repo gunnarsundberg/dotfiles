@@ -1,226 +1,114 @@
 ---
 name: search-tools
-description: "Replaces ALL built-in search tools. You MUST invoke this skill BEFORE any search — semantic, text, or file. NEVER use built-in Grep, Glob, or Find tools. Use grepai for semantic/intent search, rg for text search, and fd for file discovery."
+description: "Search and explore code with the right tool for the job. Use rg for exact text/symbol matches, fd for file discovery, and the grepai MCP for semantic/intent search and call-graph tracing. Prefer these over bash grep/find."
 ---
 
-## CRITICAL: Tool Override for All Searches
+## Pick the right search tool
 
-This skill **REPLACES** all built-in search tools for every type of search.
-
-**WRONG**:
-- Using built-in `Grep` to find text or code patterns
-- Using built-in `Glob` to find files by extension or pattern
-- Using `find` to discover files
-- Using built-in `Grep` to search by intent ("where is authentication handled?")
-
-**CORRECT**:
-- `grepai search` for semantic/intent-based code search
-- `grepai trace` for call graph and function relationship search
-- `rg` for exact text/pattern matching
-- `fd` for file discovery
-
----
-
-## Search Type Decision Guide
-
-| What you need | Tool to use |
+| What you need | Tool |
 |---|---|
-| Find code by what it *does* | `grepai search` |
-| Understand function relationships | `grepai trace` |
-| Find exact text, symbol, or pattern | `rg` |
-| Find files by name, extension, or pattern | `fd` |
+| Find code by what it *does* / a concept | grepai MCP — `grepai_search` |
+| Map function relationships (callers/callees/graph) | grepai MCP — `grepai_trace_*` |
+| Find exact text, symbol, or pattern | `rg` (ripgrep) |
+| Find files by name, extension, or path | `fd` |
+| Read a specific file you've located | `read` |
+
+Rule of thumb: **`rg`/`fd` for the literal, grepai for the conceptual.** Prefer
+`rg` over `grep` and `fd` over `find` — they're faster and respect `.gitignore`.
+You don't need grepai for a known symbol or filename; go straight to `rg`/`fd`.
 
 ---
 
-## Semantic Search — `grepai`
+## Semantic search & tracing — grepai (via MCP)
 
-Use `grepai` when searching by **intent, concept, or functionality**.
+grepai indexes the *meaning* of code with embeddings. Use it for intent-based
+questions and call-graph exploration. Call it through the MCP gateway, not the CLI.
 
-### When to use grepai
-
-- Finding code by what it does: "where is authentication handled?"
-- Understanding how something works: "how does the indexer work?"
-- Exploring functionality: "find error handling logic"
-- Understanding code relationships: "what calls this function?"
-- Implementation details: "how are vectors stored?"
-
-### Semantic Search
+**Requires an index.** The grepai MCP server only connects in a project that has
+a `.grepai` index. If a repo isn't indexed yet:
 
 ```bash
-# Natural language queries (always use English for best results)
-grepai search "user authentication flow"
-grepai search "error handling middleware"
-grepai search "database connection pooling"
-grepai search "API request validation"
-
-# JSON output for structured results (--compact saves ~80% tokens)
-grepai search "authentication flow" --json --compact
-
-# Limit number of results
-grepai search "error handling" -n 5
+grepai init      # initialize in the project root
+grepai watch     # build/maintain the index (background daemon)
+grepai status    # check index health
 ```
 
-### Call Graph Tracing
+If grepai is unavailable or the project isn't indexed, **fall back to `rg`/`fd`**
+with descriptive patterns — don't block on it.
 
-```bash
-# Find all functions that CALL a symbol
-grepai trace callers "HandleRequest" --json
+### Using the grepai MCP tools
 
-# Find all functions CALLED BY a symbol
-grepai trace callees "ProcessOrder" --json
+Discover and call them through the `mcp` tool:
 
-# Build complete call graph (both directions)
-grepai trace graph "ValidateToken" --depth 3 --json
+```
+mcp({ server: "grepai" })                       # list available tools
+mcp({ describe: "grepai_search" })              # confirm arg schema
+mcp({ tool: "grepai_search", args: '{"query": "user authentication flow"}' })
 ```
 
-### grepai Best Practices
+Available tools (from `grepai mcp-serve`):
 
-**Do:**
-```bash
-grepai search "How are file chunks created and stored?"
-grepai search "Vector embedding generation process"
-grepai search "Configuration loading and validation"
-grepai trace callers "Search" --json
-```
+- `grepai_search` — semantic code search from a natural-language query
+- `grepai_trace_callers` — functions that call a symbol
+- `grepai_trace_callees` — functions called by a symbol
+- `grepai_trace_graph` — call graph around a symbol (supports depth)
+- `grepai_index_status` — index health/statistics
 
-**Don't:**
-```bash
-grepai search "func"            # Too vague
-grepai search "error"           # Too generic
-grepai search "HandleRequest"   # Use rg for exact symbol matches
-```
+### Good semantic queries
 
-### grepai Fallback
+Describe behavior in plain English; don't pass bare symbols or single words.
 
-If grepai fails (index not built, embedder unavailable), fall back to `rg` with descriptive patterns.
-- Index not built: run `grepai watch` to build/update the index
-- Embedder not available: check Ollama is running or OpenAI API key is set
+- Good: "where is authentication handled?", "how are file chunks stored?",
+  "request validation middleware", "config loading and validation"
+- Bad: `func`, `error`, `HandleRequest` (use `rg` for exact symbols)
 
 ---
 
-## Text Search — `rg` (ripgrep)
+## Text search — `rg` (ripgrep)
 
-Use `rg` for **exact text, symbol, or pattern matching**. Always prefer `rg` over `grep`.
-
-### Common Usage
+For exact text, symbols, and patterns.
 
 ```bash
-# Exact symbol or text match
-rg "func NewIndexer"
-rg "configPath"
-
-# Search specific file types
-rg "import.*cobra" -t go
-rg "useState" -t ts
-
-# Case-insensitive
-rg -i "handlerequest"
-
-# Show context lines
-rg "TODO" -C 3
-
-# Search only filenames matching a glob
-rg "authenticate" --glob "*.go"
-
-# JSON output for structured results
-rg "HandleRequest" --json
-
-# List files containing a match (no line content)
-rg -l "database"
-
-# Search hidden files/dirs too
-rg --hidden "secret"
-
-# Multiline match
-rg -U "func.*\n.*error"
+rg "func NewIndexer"          # exact symbol/text
+rg -i "handlerequest"         # case-insensitive
+rg "useState" -t ts           # scope by file type (-t go, -t py, -t rs, ...)
+rg "authenticate" --glob "internal/**"   # scope by path
+rg "TODO" -C 3                # context lines
+rg -l "database"              # filenames only
+rg --hidden "secret"          # include hidden files
+rg -U "func.*\n.*error"       # multiline
+rg "HandleRequest" --json     # structured output
 ```
-
-### rg Best Practices
-
-- Use `-t <lang>` to scope to a file type (e.g., `-t go`, `-t py`, `-t ts`, `-t rs`)
-- Use `--glob` for path-based scoping (e.g., `--glob "internal/**"`)
-- Use `-l` when you only need file names, not match content
-- Use `--json` when processing results programmatically
-- Prefer `rg` over `grep` always — it's faster, respects `.gitignore`, and handles binary files
 
 ---
 
-## File Discovery — `fd`
+## File discovery — `fd`
 
-Use `fd` for **finding files by name, extension, or pattern**. Always prefer `fd` over `find`.
-
-### Common Usage
+For finding files by name, extension, or path.
 
 ```bash
-# Find files by name (substring match, case-insensitive by default)
-fd auth
-fd config
-
-# Find by exact extension
-fd -e go
-fd -e ts
-fd -e json
-
-# Find by file type (f=file, d=directory, l=symlink)
-fd -t f "*.test.go"
-fd -t d "migrations"
-
-# Include hidden files
-fd --hidden .env
-
-# Search in a specific directory
-fd -e go src/
-
-# Exclude directories
-fd -e go --exclude vendor
-
-# Execute a command on results
-fd -e go -x wc -l
-
-# Combine with rg: find all Go files then search within them
-fd -e go | xargs rg "HandleRequest"
+fd auth                       # name substring (case-insensitive)
+fd -e go                      # by extension
+fd -t f -e ts src/            # files only, in a directory
+fd -t d migrations            # directories only
+fd --hidden .env              # include dotfiles
+fd -e go --exclude vendor     # exclude paths
+fd -e go -x wc -l             # run a command on results
+fd -e go | xargs rg "HandleRequest"   # combine: scope files, then search
 ```
-
-### fd Best Practices
-
-- Use `-e <ext>` for extension filtering — cleaner than glob patterns
-- Use `-t f` to restrict to files only (avoids matching directory names)
-- Use `--hidden` when you need to include dotfiles/dotdirs
-- Use `-x` to execute commands on matched files
 
 ---
 
-## Recommended Workflow
+## Recommended workflow
 
-1. **Start with `grepai search`** for semantic exploration ("how does X work?")
-2. **Use `grepai trace`** to map function relationships
-3. **Use `fd`** to locate relevant files by name or extension
-4. **Use `rg`** for exact text/symbol searches within known files
-5. **Use `read`** to examine specific files surfaced by the above
-
----
-
-## Quick Reference
-
-```bash
-# Semantic
-grepai search "authentication flow" --json --compact
-grepai trace callers "MyFunc" --json
-
-# Text
-rg "exact symbol" -t go
-rg -l "pattern"                     # files only
-rg "pattern" --glob "src/**"
-
-# Files
-fd -e go
-fd config -t f
-fd --hidden .env
-```
+1. Conceptual question ("how does X work?") → `grepai_search` (if indexed).
+2. Need call relationships → `grepai_trace_callers` / `_callees` / `_graph`.
+3. Know the name/extension → `fd` to locate files.
+4. Know the exact text/symbol → `rg` to find occurrences.
+5. `read` the files the above surface.
 
 ## Keywords
 
-search, grep, find, rg, ripgrep, fd, fzf, grepai, semantic search, code search,
-natural language search, file discovery, text search, pattern matching, exact match,
-call graph, callers, callees, function relationships, code exploration, codebase research,
-intent search, grep replacement, find replacement
+search, grep, find, rg, ripgrep, fd, grepai, semantic search, code search,
+natural language search, file discovery, text search, pattern matching,
+call graph, callers, callees, function relationships, code exploration

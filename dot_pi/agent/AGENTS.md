@@ -1,38 +1,52 @@
 # Pi Global Context
 
-## Exploration and File Finding
+## Searching code (`search-tools` skill)
 
-Use search-tools tool for finiding and exploring files. This replaces ALL
-built-in search tools. You MUST invoke this skill BEFORE any search —
-semantic, text, or file.
+- `rg` — exact text/symbols; `fd` — files. Prefer these over bash `grep`/`find`.
+- grepai MCP (`grepai_search`, `grepai_trace_*`) — semantic search + call
+  tracing, but **only in a repo with a `.grepai` index**. If unindexed or
+  unavailable, fall back to `rg`/`fd` — don't block on it.
 
-If you want to research and extensively explore a codebase specifically, delegate
-to the sage Forge agent.
+## Browser automation
 
-## Coding Tasks — Delegate to Forge
+- **cmux in use → `cmux-browser` skill**: drive cmux browser surfaces (open,
+  interact, wait, extract).
+- **Otherwise → chrome-devtools MCP**: interactive browser sessions when cmux
+  isn't running.
 
-For any task that involves reading, modifying, or creating files in a code
-repository, use the `forge` tool rather than handling it directly.
+## Web research (`pi-web-access`)
 
-### Agent Selection
+- `code_search` — API usage, library examples, debugging a specific error.
+- `web_search` — everything else; use `queries: [...]` with varied angles for
+  research breadth.
+- `fetch_content` — extract a known URL / YouTube / repo (pass the user's
+  question in `prompt` for video).
+- `get_search_content` — only to re-read full content from a prior search/fetch.
 
-| Task type                                    | Agent  |
-|----------------------------------------------|--------|
-| Read-only research, codebase analysis        | sage   |
-| Planning, impact analysis, architecture      | muse   |
-| Implementation, file editing, tests          | forge  |
+## Subagent orchestration (`pi-subagents` skill)
 
-### Delegation Guidelines
+- `pi-subagents` + `subagent()` is authoritative: async-by-default, named roles
+  (`scout`/`planner`/`worker`/`reviewer`/`oracle`), keep builtin model defaults,
+  `reviewer`/`/review-loop` for review fanout.
+- Superpowers `subagent-driven-development` / `dispatching-parallel-agents` are
+  conceptual only (fresh context per task, review loops, one writer thread);
+  their Task-tool/template/script assumptions don't fit pi. On any conflict
+  (async vs sync, model overrides, agent naming, review machinery),
+  **`pi-subagents` governs.**
+- Delegating to `worker`: attach `test-driven-development` +
+  `verification-before-completion` (children don't inherit skills).
+- Superpowers process skills still govern *how work is done*: `brainstorming`,
+  `test-driven-development`, `systematic-debugging`, `writing-plans`,
+  `verification-before-completion`.
 
-- Include all relevant context in the task description — Forge starts fresh
-  each invocation with no memory of prior Pi turns.
-- Confirm the working directory (`cwd`) before delegating.
-- For multi-step workflows, break them into discrete Forge calls rather than
-  one large task. Prefer `sage` for reconnaissance before `forge` for
-  implementation.
-- When Forge returns results, summarise the outcome for the user and decide
-  whether follow-up Forge calls are needed.
+## Code review — pick by audience/timing (they compose)
 
-## Non-Coding Tasks
-
-Handle orchestration, automation, and non-file tasks directly.
+- **Human sign-off → `crit`**: inline comments a human reads/resolves on a diff,
+  plan, running page, or local HTML. (`crit-cli` is the same tool's
+  programmatic interface for agents authoring/replying to comments.)
+- **Continuous agent review → Superpowers `requesting`/`receiving-code-review`
+  (`reviewer` subagent)**: after each task, after a feature, before merge. The
+  default mid-development gate.
+- **Pre-PR sweep → fastly `code-review`**: final multi-dimension check before
+  opening a PR (consistency, idiomatic Go, data correctness, security);
+  strongest for Go/Fastly code.
