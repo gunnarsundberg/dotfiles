@@ -13,10 +13,13 @@
   },
   "lastChangelogVersion": "0.80.3",
   "theme": "dark",
+  "npmCommand": ["{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/npm"],
   "packages": [
 		{{- if eq .role "work" }}
     "git:github.com/fastly/agent-skills-internal",
 		{{- end }}
-    "git:github.com/obra/superpowers"
+    "git:github.com/obra/superpowers",
+    "npm:pi-subagents",
+    "npm:pi-intercom"
   ]
 }
