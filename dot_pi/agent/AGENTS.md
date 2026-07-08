@@ -9,10 +9,19 @@
 
 ## Browser automation
 
-- **cmux in use → `cmux-browser` skill**: drive cmux browser surfaces (open,
-  interact, wait, extract).
-- **Otherwise → chrome-devtools MCP**: interactive browser sessions when cmux
-  isn't running.
+- **chrome-devtools MCP**: interactive browser sessions.
+
+## Version control
+
+- Repos may be colocated jj+git. Agents always use **git** (`git worktree add`, `git commit`, etc.) — never `jj` commands.
+- The user uses jj personally; don't interfere with `.jj/` or suggest jj workflows.
+
+## Herdr (agent multiplexer)
+
+- Running inside herdr when `HERDR_ENV=1` — use the `herdr` skill for pane/workspace management.
+- In-process `subagent()` calls are **invisible** to herdr's agents panel.
+- For visible subagents: `herdr agent start <name> -- pi` + coordinate via intercom.
+- Pi lifecycle integration is installed — this session reports idle/working/blocked accurately.
 
 ## Web research (`pi-web-access`)
 
