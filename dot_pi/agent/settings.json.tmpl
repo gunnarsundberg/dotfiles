@@ -4,8 +4,8 @@
     "keepRecentTokens": 20000,
     "reserveTokens": 16384
   },
-  "defaultModel": "global.anthropic.claude-sonnet-5",
-  "defaultProvider": "amazon-bedrock",
+  "defaultModel": "claude-sonnet-5",
+  "defaultProvider": "claude-bridge",
   "enableInstallTelemetry": false,
   "retry": {
     "enabled": true,
@@ -13,7 +13,9 @@
   },
   "lastChangelogVersion": "0.82.1",
   "theme": "dark",
-  "npmCommand": ["{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/npm"],
+  "npmCommand": [
+	  "{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/npm"
+	],
   "packages": [
 		{{- if eq .role "work" }}
     "git:github.com/fastly/agent-skills-internal",
@@ -21,6 +23,6 @@
     "git:github.com/obra/superpowers",
     "npm:pi-subagents",
     "npm:pi-intercom",
-		"npm:pi-claude-bridge"
+    "npm:pi-claude-bridge"
   ]
 }
