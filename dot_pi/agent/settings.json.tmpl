@@ -4,14 +4,14 @@
     "keepRecentTokens": 20000,
     "reserveTokens": 16384
   },
-  "defaultModel": "global.anthropic.claude-sonnet-4-6",
+  "defaultModel": "global.anthropic.claude-sonnet-5",
   "defaultProvider": "amazon-bedrock",
   "enableInstallTelemetry": false,
   "retry": {
     "enabled": true,
     "maxRetries": 3
   },
-  "lastChangelogVersion": "0.80.3",
+  "lastChangelogVersion": "0.82.1",
   "theme": "dark",
   "npmCommand": ["{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/npm"],
   "packages": [
@@ -20,6 +20,7 @@
 		{{- end }}
     "git:github.com/obra/superpowers",
     "npm:pi-subagents",
-    "npm:pi-intercom"
+    "npm:pi-intercom",
+		"npm:pi-claude-bridge"
   ]
 }
