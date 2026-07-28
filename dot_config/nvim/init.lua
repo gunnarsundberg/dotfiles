@@ -20,6 +20,7 @@ vim.pack.add({
 	'https://github.com/nvim-mini/mini.pick',
 	'https://github.com/nvim-mini/mini.completion',
 	'https://github.com/evanphx/jjsigns.nvim',
+	'https://github.com/neovim/nvim-lspconfig',
 	-- theme
 	'https://github.com/vimcolorschemes/olive-crt.nvim'
 })
