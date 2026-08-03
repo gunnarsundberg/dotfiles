@@ -1,0 +1,7 @@
+{
+  "intercomBridge": {
+    "mode": "always",
+    "resultDelivery": true,
+    "instructionFile": "./intercom-bridge-instructions.md"
+  }
+}

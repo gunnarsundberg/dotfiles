@@ -1,9 +1,16 @@
 ---
 name: herdr
-description: "Control herdr from inside a herdr-managed pane. Use for pane/workspace management, spawning visible agent siblings, waiting on agent states, reading pane output, and launching pi subagents as visible herdr targets. Triggers when HERDR_ENV=1 or when the user asks about herdr pane/agent management."
+description: "Run or watch long-running/user-visible work in a herdr pane — dev servers, test suites, builds, parallel visible workers — or manage herdr panes/tabs/workspaces directly. Use when the user wants to watch or attach to something alongside the conversation, wants parallel work visible in herdr's agents panel, or explicitly asks about herdr panes/workspaces/agents. Do not use merely because HERDR_ENV=1 is set — that's true in nearly every session and is not itself a trigger. Not for short-lived advisory subagent work — use subagent() for that."
 ---
 
 # Herdr Skill
+
+## When to use this skill
+
+- The user wants to watch, attach to, or interact with a running process (dev server, test run, build) alongside the conversation.
+- The user wants parallel work visible in herdr's agents panel, or wants to spawn a named agent they can check on or attach to directly.
+- The user explicitly asks about herdr panes, tabs, workspaces, or agent status.
+- **Not** for short-lived advisory delegation (scout/reviewer/researcher-style work) — use `subagent()` for that; it's faster and better coordinated, and this skill's own rules say not to substitute herdr panes for it.
 
 ## Prerequisite check
 
@@ -58,6 +65,8 @@ herdr pane run "$NEW_PANE" "cd $PWD && pi"
 herdr wait output "$NEW_PANE" --match ">" --timeout 15000
 herdr pane run "$NEW_PANE" "Your task here"
 ```
+
+This manual `intercom ask`/status-polling pattern applies only to raw herdr-pane `pi` sessions like this one — they have no native result delivery. Never use it on children launched via `subagent()`; those auto-deliver their result and polling them via intercom produces duplicate delivery.
 
 Then coordinate via intercom — the new pi session should `/name` itself so it's easy to target:
 

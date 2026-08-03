@@ -13,14 +13,12 @@
 
 ## Version control
 
-- Repos may be colocated jj+git. Agents always use **git** (`git worktree add`, `git commit`, etc.) — never `jj` commands.
-- The user uses jj personally; don't interfere with `.jj/` or suggest jj workflows.
+- Prefer **jj** over git whenever a repo has a `.jj/` directory (colocated jj+git). Use `jj` commands (`jj new`, `jj commit`, `jj git push`, etc.) directly — fall back to `git` only in repos without `.jj/`.
 
 ## Herdr (agent multiplexer)
 
-- Running inside herdr when `HERDR_ENV=1` — use the `herdr` skill for pane/workspace management.
-- In-process `subagent()` calls are **invisible** to herdr's agents panel.
-- For visible subagents: `herdr agent start <name> -- pi` + coordinate via intercom.
+- Use the `herdr` skill when work is long-running or the user may want to watch/attach (dev servers, test runs, builds), or for parallel visible workers — not merely because `HERDR_ENV=1` is set.
+- In-process `subagent()` calls are **invisible** to herdr's agents panel but auto-deliver their result — don't poll them via `intercom`. Manual `intercom ask`/status-polling is only for raw herdr-pane `pi` sessions spawned via `herdr agent start`, which have no native result delivery.
 - Pi lifecycle integration is installed — this session reports idle/working/blocked accurately.
 
 ## Web research (`pi-web-access`)
