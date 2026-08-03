@@ -15,6 +15,15 @@
          "preferences": {
             "version": "v8"
          }
+      },
+      "@thomas/store.raycast.google-calendar": {
+         "entrypoints": {
+            "list-events": {
+               "preferences": {
+                  "openCommandJoinsMeeting": true
+               }
+            }
+         }
       }
    }
 }
