@@ -1,0 +1,20 @@
+# Vicinae store extensions, kept in sync manually.
+# Vicinae has no CLI/deeplink for headless install — use this as a
+# checklist when setting up a new machine: open the store command,
+# search each owner/name below, and click Install.
+#
+# Format: owner/store-id (title)
+
+# Universal
+raycast/store.raycast.browser-bookmarks (Browser Bookmarks)
+Aayush9029/store.raycast.cleanshotx (CleanShot X)
+raycast/store.raycast.github (GitHub)
+destiner/store.raycast.json-format (Format JSON)
+knoopx/store.vicinae.firefox (Firefox)
+{{- if eq .role "work" }}
+
+# Work
+khasbilegt/store.raycast.1password (1Password)
+raycast/store.raycast.jira (Jira)
+thomas/store.raycast.google-calendar (Google Calendar)
+{{- end }}
