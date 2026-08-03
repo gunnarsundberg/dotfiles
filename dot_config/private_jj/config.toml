@@ -3,3 +3,10 @@
 [user]
 name = "gunnar"
 email = "gunnarsundberg@pm.me"
+
+[aliases]
+# Rebase my own in-progress stacks onto the latest trunk after `jj git fetch`.
+# roots(trunk()..) selects each stack's base commit; mine() limits to my commits;
+# -s carries each base's descendants. (mine() applies to the base only, so a
+# stack rooted on my commit still moves any others stacked on top of it.)
+restack = ["rebase", "-d", "trunk()", "-s", "roots(trunk()..) & mutable() & mine()"]
