@@ -5,8 +5,11 @@ tap "protonpass/tap", trusted: true
 {{- end }}
 {{- if eq .role "work" }}
 tap "infrahq/tap", trusted: true
+tap "hashicorp/tap", trusted: true
 {{- end }}
 
+brew "chezmoi"
+brew "coreutils"
 brew "fish"
 brew "fnm"
 brew "tmux"
@@ -20,6 +23,7 @@ brew "eza"
 brew "ripgrep"
 brew "fd"
 brew "bat"
+brew "buf"
 brew "grepai"
 brew "crit"
 brew "process-compose"
@@ -29,11 +33,15 @@ brew "rtk"
 brew "pass-cli"
 {{- end }}
 {{- if eq .role "work" }}
-brew "vault-cli"
+brew "hashicorp/tap/vault"
 brew "container"
+brew "docker-credential-helper"
+brew "gimme-aws-creds"
 {{- end }}
 
 brew "k9s"
+brew "kubernetes-cli"
+brew "helm"
 {{- if eq .role "work" }}
 brew "infra"
 {{- end }}
