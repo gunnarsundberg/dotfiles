@@ -2,6 +2,13 @@
 # Brewfile hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
 brew bundle --file="{{ .chezmoi.homeDir }}/.config/homebrew/Brewfile"
 
+# --- agent-browser (via fnm-managed node, not brew) ---
+FNM_NPM="{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/npm"
+if ! command -v agent-browser &> /dev/null; then
+    echo "Installing agent-browser..."
+    "$FNM_NPM" install -g agent-browser
+fi
+
 {{- if eq .role "work" }}
 # --- Dagger ---
 if ! command -v dagger &> /dev/null; then
