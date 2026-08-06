@@ -1,0 +1,11 @@
+version: "0.5"
+log_location: {{ .chezmoi.homeDir }}/Library/Logs/process-compose.log
+processes:
+{{- if eq .role "personal" }}
+  pass-cli-ssh-agent:
+    description: "Proton Pass SSH agent"
+    command: "pass-cli ssh-agent start --socket-path {{ .chezmoi.homeDir }}/.ssh/proton-pass-agent.sock"
+    availability:
+      restart: always
+      backoff_seconds: 5
+{{- end }}
