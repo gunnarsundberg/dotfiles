@@ -30,11 +30,11 @@ brew "herdr"
 brew "rtk"
 {{- if eq .role "personal" }}
 brew "pass-cli"
+brew "docker-credential-helper"
 {{- end }}
 {{- if eq .role "work" }}
 brew "hashicorp/tap/vault"
 brew "container"
-brew "docker-credential-helper"
 brew "gimme-aws-creds"
 {{- end }}
 
