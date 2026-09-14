@@ -13,7 +13,7 @@ fi
 # --- Dagger ---
 if ! command -v dagger &> /dev/null; then
     echo "Installing Dagger..."
-    curl -fsSL https://dl.dagger.io/dagger/install.sh | DAGGER_VERSION=0.21.7 BIN_DIR=/usr/local/bin sh
+    curl -fsSL https://dl.dagger.io/dagger/install.sh | DAGGER_VERSION=0.21.9 BIN_DIR=/usr/local/bin sh
 fi
 {{- end }}
 
