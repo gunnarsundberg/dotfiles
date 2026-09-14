@@ -1,5 +1,6 @@
 tap "yoanbernabeu/tap", trusted: true
 tap "f1bonacc1/tap", trusted: true
+tap "can1357/tap", trusted: true
 {{- if eq .role "personal" }}
 tap "protonpass/tap", trusted: true
 {{- end }}
@@ -28,6 +29,7 @@ brew "crit"
 brew "process-compose"
 brew "herdr"
 brew "rtk"
+brew "omp"
 {{- if eq .role "personal" }}
 brew "pass-cli"
 brew "docker-credential-helper"
