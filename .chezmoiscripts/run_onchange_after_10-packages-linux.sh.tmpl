@@ -1,7 +1,7 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
 set -eu
-# Pacman manifest: {{ include "dot_config/pacman/packages.txt.tmpl" | sha256sum }}
+# Pacman manifest data: {{ printf "%q %q %q" .packages.common .packages.linux.pacman (index .packages.linux.roles .role "pacman") | sha256sum }}
 if ! command -v pacman >/dev/null 2>&1; then
     echo "Linux package installation requires pacman (Arch/CachyOS)." >&2
     exit 1

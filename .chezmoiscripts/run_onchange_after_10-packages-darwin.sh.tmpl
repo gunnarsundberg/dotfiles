@@ -1,7 +1,7 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 set -eu
-# Brewfile: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
+# Brewfile data: {{ printf "%q %q %q %q %q %q" .role .packages.common .packages.darwin.formula .packages.darwin.cask (index .packages.darwin.roles .role "formula") (index .packages.darwin.roles .role "cask") | sha256sum }}
 brew bundle --file="{{ .chezmoi.homeDir }}/.config/homebrew/Brewfile"
 {{- else -}}
 #!/bin/sh
