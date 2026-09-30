@@ -37,7 +37,9 @@ packages:
         formula:
           - pass-cli
           - docker-credential-helper
-        cask: []
+        cask:
+          - thunderbird
+          - proton-mail-bridge
       work:
         formula:
           - hashicorp/tap/vault
@@ -55,8 +57,11 @@ packages:
       - fnm
       - github-cli
       - kubectl
+      - ghostty
     roles:
       personal:
-        pacman: []
+        pacman:
+          - thunderbird
+          - protonmail-bridge
       work:
         pacman: []
