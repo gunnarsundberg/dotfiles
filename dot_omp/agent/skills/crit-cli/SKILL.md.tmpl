@@ -1,0 +1,43 @@
+---
+name: crit-cli
+description: Use for non-interactive Crit operations: reading or replying to review comments, sharing, syncing comments with GitHub/GitLab changes, or interpreting Crit review JSON. Use the crit skill for the human browser review loop.
+user-invocable: false
+---
+
+# Crit CLI operations
+
+The active review path is shown by `crit status`. Prefer Crit's finish output when available; otherwise use:
+
+```bash
+crit comments            # unresolved comments
+crit comments --json     # structured comments
+crit comments --all      # include resolved comments
+crit comments --plan <slug>
+```
+
+Add review, file, or line comments with `crit comment`. Always attribute comments to `OMP` and quote shell arguments safely:
+
+```bash
+crit comment --author 'OMP' 'Overall review comment'
+crit comment --author 'OMP' src/auth.go:42 'Missing null check'
+crit comment --reply-to <id> --author 'OMP' 'Addressed this'
+```
+
+Do not pass `--resolve` unless the user explicitly asks. Use `--plan <slug>` for plan review files. For three or more comments, use `crit comment --json --author 'OMP'` with the documented JSON schema; use a file for multiline bodies rather than hand-built shell quoting.
+
+GitHub/GitLab synchronization:
+
+```bash
+crit pull [change-number-or-url]
+crit push --dry-run [change-number]
+crit push [--event comment|approve|request-changes] [change-number]
+```
+
+Sharing and cleanup:
+
+```bash
+crit share <file> [file...]
+crit unpublish [file...]
+```
+
+Only share, publish, push, or unpublish when the user requests it. Relay Crit's full share output. Resolve comments only on explicit instruction.

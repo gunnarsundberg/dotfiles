@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+  "mcpServers": {
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    },
+    "grepai": {
+      "type": "stdio",
+      "command": "grepai",
+      "args": ["mcp-serve"]
+    }{{ if eq .role "work" }},
+    "google-workspace": {
+      "type": "stdio",
+      "command": "bash",
+      "args": [
+        "-c",
+        "for cache in \"$HOME/.omp/plugins/cache/marketplaces\"/*; do script=\"$cache/plugins/google-workspace/scripts/run.sh\"; if [ -f \"$script\" ]; then exec bash \"$script\"; fi; done; if [ -n \"$XDG_DATA_HOME\" ]; then for cache in \"$XDG_DATA_HOME/omp/plugins/cache/marketplaces\"/*; do script=\"$cache/plugins/google-workspace/scripts/run.sh\"; if [ -f \"$script\" ]; then exec bash \"$script\"; fi; done; fi; echo 'Google Workspace MCP script was not found in the OMP marketplace cache' >&2; exit 1"
+      ]
+    },
+    "atlassian": {
+      "type": "http",
+      "url": "https://cf.mcp.atlassian.com/v1/mcp"
+    }
+{{ end }}
+  }
+}

@@ -1,0 +1,69 @@
+---
+name: herdr
+description: Use Herdr panes when the user wants a process or agent visible and attachable, or asks to manage Herdr workspaces, tabs, panes, or agent status. Not for ordinary short-lived advisory delegation; use OMP's built-in task tool for that.
+---
+
+# Herdr workflows
+
+## Choose Herdr only for visible, persistent work
+
+Use Herdr when the user wants to watch or attach to a long-running server, test run, build, or explicitly visible worker. For short-lived research/review fanout, use OMP's built-in `task` tool instead; do not create Herdr panes just to parallelize routine work.
+
+Before controlling Herdr, verify that this OMP session was launched by Herdr:
+
+```bash
+echo "HERDR_ENV=${HERDR_ENV:-unset}"
+```
+
+If `HERDR_ENV` is not `1`, do not try Herdr commands; explain that this session lacks the Herdr connection.
+
+## Inspect before acting
+
+```bash
+herdr pane list
+herdr workspace list
+herdr tab list --workspace 1
+```
+
+Workspace IDs, tab IDs, and pane IDs can compact after closes. Re-read them before using a remembered ID. Use `--no-focus` for creates/splits unless the user requests a focus change.
+
+## Run visible work
+For a long-running command in a new visible pane:
+
+```bash
+NEW_PANE=$(herdr pane split 1-1 --direction right --no-focus | python3 -c 'import sys,json; print(json.load(sys.stdin)["result"]["pane"]["pane_id"])')
+herdr pane run "$NEW_PANE" "<command>"
+herdr pane read "$NEW_PANE" --source recent --lines 40
+```
+
+For a named, visible OMP worker when the user asks for one:
+
+```bash
+herdr agent start worker --cwd "$PWD" -- omp "<task>"
+herdr wait agent-status worker --status done --timeout 300000
+herdr pane list
+```
+
+Read the completed pane's output and report its result; Herdr panes do not deliver results into this OMP conversation automatically.
+
+## Wait and inspect
+
+```bash
+herdr wait output <pane-id> --match "ready" --timeout 30000
+herdr pane read <pane-id> --source recent --lines 80
+herdr pane read <pane-id> --source recent-unwrapped --lines 80
+```
+
+`recent-unwrapped` is useful when matching text that wraps in the terminal. A wait timeout exits non-zero; inspect the pane instead of claiming completion.
+
+## Manage panes and workspaces
+
+```bash
+herdr pane send-keys <pane-id> Enter
+herdr pane send-text <pane-id> "<text>"
+herdr pane close <pane-id>
+herdr tab create --workspace <workspace-id> --label "tests" --no-focus
+herdr workspace create --cwd "$PWD" --label "api-server" --no-focus
+```
+
+Re-list IDs after closing anything. Keep user-visible work running only as long as it remains useful; do not close or overwrite a user's existing pane without permission.

@@ -1,0 +1,18 @@
+# OMP Global Context
+
+## Use built-in capabilities first
+
+- Prefer OMP's `read`, `grep`, `glob`, `find`, LSP, browser, and web tools over installing extensions that duplicate them.
+- Use the built-in `task` tool for independent short-lived work. Use Herdr when work should be visible or attachable.
+- Use `jj` in repositories that contain `.jj/`; otherwise use the repository's normal version-control tool.
+- Use OMP's built-in `/review` for agent review. Use Crit when human inline review or Crit-specific publishing is requested.
+
+## Web research
+
+Use OMP's `web_search` and `read` for normal web research. Add a browser or MCP extension only for a concrete capability not covered by the built-in web/browser tools.
+
+{{ if eq .role "work" }}
+## Work-only integrations
+
+Fastly internal skills are available only on work-role machines through the configured OMP marketplace. Do not copy private Fastly content into personal-role configuration.
+{{ end }}

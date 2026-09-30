@@ -1,0 +1,22 @@
+{{- if eq .role "work" -}}
+#!/bin/sh
+set -eu
+{{ if eq .chezmoi.os "darwin" -}}
+OMP="$(brew --prefix omp)/bin/omp"
+{{- else }}
+OMP="{{ .chezmoi.homeDir }}/.local/bin/omp"
+{{- end }}
+if [ ! -x "$OMP" ]; then
+    echo "Oh My Pi is not installed; cannot configure the Fastly marketplace" >&2
+    exit 1
+fi
+
+if [ -f "$HOME/.omp/marketplaces.json" ] && grep -Fq 'fastly/agent-skills-internal' "$HOME/.omp/marketplaces.json"; then
+    exit 0
+fi
+
+"$OMP" plugin marketplace add fastly/agent-skills-internal
+{{- else -}}
+#!/bin/sh
+exit 0
+{{- end }}

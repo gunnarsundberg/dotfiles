@@ -15,7 +15,7 @@ On first use, `.chezmoi.toml.tmpl` prompts for role, Git email, SSH signing key,
 
 The package hook runs after chezmoi deploys its files and fingerprints the active role's package data, so package-list changes rerun installation. On macOS it runs `brew bundle`; on Linux it requires `pacman` and installs the generated package list with `sudo`. The Linux package list targets Arch-based systems. Install or bootstrap chezmoi itself before the first apply.
 
-Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser through fnm-managed npm. Pi configuration remains deployed from `dot_pi`, but the Pi executable is not installed.
+Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser through fnm-managed npm, Oh My Pi (`omp`), and Crit on Linux; macOS installs OMP and Crit from Homebrew. OMP configuration is deployed from `dot_omp`, including native Herdr/Crit skills and role-aware MCP servers. The Fastly internal marketplace and Google Workspace MCP are work-only. Pi configuration remains deployed from `dot_pi`, but the Pi executable is not installed.
 
 On Linux personal machines, the user-tool hook installs Proton Pass CLI into `~/.local/bin`. After applying, authenticate once and enable its user service:
 
@@ -56,6 +56,7 @@ dot_config/
   nvim/                          # Neovim configuration
   process-compose/               # Darwin process configuration
   ghostty/                       # shared Ghostty configuration
+dot_omp/agent/                 # OMP configuration, MCP servers, and native skills
 dot_pi/                          # Pi settings and agent instructions
 private_Library/LaunchAgents/    # macOS-only LaunchAgents
 ```

@@ -4,8 +4,6 @@
     "keepRecentTokens": 20000,
     "reserveTokens": 16384
   },
-  "defaultModel": "claude-sonnet-5",
-  "defaultProvider": "claude-bridge",
   "enableInstallTelemetry": false,
   "retry": {
     "enabled": true,
@@ -18,15 +16,7 @@
   ],
   "packages": [
 {{ if eq .role "work" }}
-    "git:github.com/fastly/agent-skills-internal",
+    "git:github.com/fastly/agent-skills-internal"
 {{ end }}
-    "git:github.com/obra/superpowers",
-    "npm:pi-subagents",
-    "npm:pi-intercom",
-    "npm:pi-claude-bridge",
-    "npm:pi-mcp-adapter",
-    "npm:pi-web-access",
-    "npm:pi-rtk-optimizer",
-    "npm:pi-agent-browser-native"
   ]
 }

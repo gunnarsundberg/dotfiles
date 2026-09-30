@@ -1,0 +1,10 @@
+---
+name: verification-before-completion
+description: Use before claiming a fix, feature, or configuration change works, and before committing; choose and run evidence that exercises the changed path.
+---
+
+# Verification before completion
+
+Before a completion claim, identify the behavior that could fail and run the narrowest check that exercises it. Read the exit status and output. For a UI, CLI, or integration change, smoke-test the actual surface; tests alone do not prove the user-facing path works.
+
+Report only checks actually run and what they proved. Separate untested paths and environmental blockers from verified behavior. Do not claim success from an edit, a test name, an agent report, or an inferred default.

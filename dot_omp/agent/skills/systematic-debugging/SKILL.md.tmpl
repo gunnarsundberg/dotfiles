@@ -1,0 +1,12 @@
+---
+name: systematic-debugging
+description: Use when behavior, tests, builds, or integrations fail unexpectedly; establish the cause from evidence before changing code.
+---
+
+# Systematic debugging
+
+1. Read the complete error and reproduce the reported behavior when doing so is safe and useful. Treat user-reported failures and observations as evidence; do not rerun them just to confirm.
+2. Inspect the relevant call path, configuration, environment, and recent changes. In multi-component failures, gather evidence at component boundaries before choosing a fix.
+3. State one root-cause hypothesis and a minimal check that could disprove it. Change one causal variable at a time.
+4. Fix the cause rather than suppressing the symptom. Add a focused regression test when practical; verify the changed path and report remaining uncertainty.
+5. If repeated fixes fail, stop layering patches and reconsider the underlying design.

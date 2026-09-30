@@ -7,6 +7,31 @@ if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/pass-cli" ]; then
     curl -fsSL https://proton.me/download/pass-cli/install.sh | PROTON_PASS_CLI_INSTALL_DIR="{{ .chezmoi.homeDir }}/.local/bin" bash
 fi
 {{ end }}
+{{ if eq .chezmoi.os "linux" }}
+if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/omp" ]; then
+    echo "Installing Oh My Pi..."
+    curl -fsSL https://raw.githubusercontent.com/can1357/oh-my-pi/main/scripts/install.sh | PI_INSTALL_DIR="{{ .chezmoi.homeDir }}/.local/bin" sh -s -- --binary
+fi
+{{ end }}
+{{ if eq .chezmoi.os "linux" }}
+if ! command -v crit >/dev/null 2>&1 && [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/crit" ]; then
+    case "$(uname -m)" in
+        x86_64|amd64) CRIT_ARCH=amd64 ;;
+        aarch64|arm64) CRIT_ARCH=arm64 ;;
+        *) echo "Unsupported architecture for Crit: $(uname -m)" >&2; exit 1 ;;
+    esac
+    CRIT_ASSET="crit-linux-$CRIT_ARCH"
+    CRIT_TMP="$(mktemp -d)"
+    trap 'rm -rf "$CRIT_TMP"' EXIT
+    CRIT_BASE="https://github.com/tomasz-tomczyk/crit/releases/latest/download"
+    echo "Installing Crit..."
+    curl -fsSL "$CRIT_BASE/$CRIT_ASSET" -o "$CRIT_TMP/$CRIT_ASSET"
+    curl -fsSL "$CRIT_BASE/checksums.txt" -o "$CRIT_TMP/checksums.txt"
+    awk -v asset="$CRIT_ASSET" '$2 == asset { print; found=1; exit } END { if (!found) exit 1 }' "$CRIT_TMP/checksums.txt" > "$CRIT_TMP/checksum.txt"
+    (cd "$CRIT_TMP" && sha256sum --check checksum.txt)
+    install -Dm755 "$CRIT_TMP/$CRIT_ASSET" "{{ .chezmoi.homeDir }}/.local/bin/crit"
+fi
+{{ end }}
 
 AGENT_BROWSER="{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/agent-browser"
 if [ ! -x "$AGENT_BROWSER" ]; then

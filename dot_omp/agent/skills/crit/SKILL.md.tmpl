@@ -1,0 +1,23 @@
+---
+name: crit
+description: Use Crit when the user requests human inline review of code, a plan, a live page, or HTML, or explicitly asks for the Crit review loop. For agent-only review, use OMP's built-in /review instead.
+---
+
+# Human review with Crit
+
+Choose arguments from the request and current context; do not ask the user to select a Crit mode:
+
+```bash
+crit <file-or-directory>
+crit --pr <number-or-url>
+crit --range <base>..<head>
+crit
+```
+
+Run Crit in the foreground and wait for the human to finish. Relay the printed local review URL so the user can comment in the browser. Do not read comments early or claim approval before Crit exits.
+
+After it exits, inspect its JSON result. If `approved` is true, report that no changes were requested. If false, address each unresolved comment, then run the exact `Next round: crit ...` command printed by Crit. Continue until the user finishes with no unresolved feedback or explicitly ends the loop.
+
+Use `crit comments --json` only when re-entering a review without its finish output. Respect comment quotes and anchors over stale line numbers. Do not resolve comments unless the user asks.
+
+For a share URL, use `crit share <file>` and relay the complete output. Do not share or publish unless requested.
