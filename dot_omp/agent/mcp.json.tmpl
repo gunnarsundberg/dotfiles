@@ -5,12 +5,12 @@
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp@latest"]
-    },
+    }{{ if eq .chezmoi.os "darwin" }},
     "grepai": {
       "type": "stdio",
       "command": "grepai",
       "args": ["mcp-serve"]
-    }{{ if eq .role "work" }},
+    }{{ end }}{{ if eq .role "work" }},
     "google-workspace": {
       "type": "stdio",
       "command": "bash",
