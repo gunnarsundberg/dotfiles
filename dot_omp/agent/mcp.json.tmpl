@@ -1,16 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
   "mcpServers": {
-    "chrome-devtools": {
+    {{ if eq .role "work" }}"chrome-devtools": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp@latest"]
-    }{{ if eq .chezmoi.os "darwin" }},
+    },{{ end }}
     "grepai": {
       "type": "stdio",
       "command": "grepai",
       "args": ["mcp-serve"]
-    }{{ end }}{{ if eq .role "work" }},
+    }{{ if eq .role "work" }},
     "google-workspace": {
       "type": "stdio",
       "command": "bash",

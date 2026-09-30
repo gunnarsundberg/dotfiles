@@ -8,6 +8,13 @@ if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/pass-cli" ]; then
 fi
 {{ end }}
 {{ if eq .chezmoi.os "linux" }}
+if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/grepai" ]; then
+    echo "Installing GrepAI..."
+    mkdir -p "{{ .chezmoi.homeDir }}/.local/bin"
+    curl -fsSL https://raw.githubusercontent.com/yoanbernabeu/grepai/main/install.sh | INSTALL_DIR="{{ .chezmoi.homeDir }}/.local/bin" sh
+fi
+{{ end }}
+{{ if eq .chezmoi.os "linux" }}
 if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/omp" ]; then
     echo "Installing Oh My Pi..."
     curl -fsSL https://raw.githubusercontent.com/can1357/oh-my-pi/main/scripts/install.sh | PI_INSTALL_DIR="{{ .chezmoi.homeDir }}/.local/bin" sh -s -- --binary

@@ -13,9 +13,9 @@ chezmoi apply
 
 On first use, `.chezmoi.toml.tmpl` prompts for role, Git email, SSH signing key, and whether the machine has Apple T2 hardware. Leave the signing-key value blank if SSH signing is not configured; Git signing is then disabled. Prompts populate local chezmoi data. To review or change those values later, edit `~/.config/chezmoi/chezmoi.toml`, then run `chezmoi apply`.
 
-The package hook runs after chezmoi deploys its files and fingerprints the active role's package data, so package-list changes rerun installation. On macOS it runs `brew bundle`; on Linux it requires `pacman` and installs the generated package list with `sudo`. The Linux package list targets Arch-based systems. Install or bootstrap chezmoi itself before the first apply.
+The package hook runs after chezmoi deploys its files and fingerprints the active role's package data, so package-list changes rerun installation. On macOS it runs `brew bundle`; on Linux it requires pacman and installs Arch repository packages with `sudo`. Install or bootstrap chezmoi itself before the first apply.
 
-Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser through fnm-managed npm, Oh My Pi (`omp`), and Crit on Linux; macOS installs OMP and Crit from Homebrew. OMP configuration is deployed from `dot_omp`, including native Herdr/Crit skills and role-aware MCP servers. The Fastly internal marketplace and Google Workspace MCP are work-only. Pi configuration remains deployed from `dot_pi`, but the Pi executable is not installed.
+Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser through fnm-managed npm, Oh My Pi (`omp`), GrepAI, and Crit on Linux; macOS installs OMP, GrepAI, and Crit from Homebrew. OMP configuration is deployed from `dot_omp`, including native Herdr/Crit skills and role-aware MCP servers. Chrome DevTools, the Fastly internal marketplace, Google Workspace MCP, and Atlassian MCP are work-only. Pi configuration remains deployed from `dot_pi`, but the Pi executable is not installed.
 
 On Linux personal machines, the user-tool hook installs Proton Pass CLI into `~/.local/bin`. After applying, authenticate once and enable its user service:
 
@@ -48,7 +48,7 @@ dot_config/
   private_fish/                 # deploys to ~/.config/fish
   private_jj/                   # deploys to ~/.config/jj
   homebrew/Brewfile.tmpl         # Darwin package manifest
-  pacman/packages.txt.tmpl      # Linux package manifest
+  pacman/packages.txt.tmpl      # Arch repository package manifest
   niri/                          # Linux desktop; T2-only settings are gated
   noctalia/                      # Linux desktop; T2 backlight setting is gated
   systemd/user/                  # personal Linux Proton Pass agent service
@@ -67,4 +67,4 @@ The Niri and Noctalia files were imported from the current Linux desktop. `.chez
 
 `.chezmoidata/packages.yaml` separates packages with the same package-manager name on both systems (`common`) from manager-specific lists (`darwin.formula`, `darwin.cask`, and `linux.pacman`). Role-specific packages live under each OS's `roles` mapping. Keep a package in `common` only when the same package name and install intent apply to both systems; put naming or manager differences in the corresponding OS list.
 
-Darwin packages are rendered into `~/.config/homebrew/Brewfile`. Linux packages are rendered into `~/.config/pacman/packages.txt`. The Linux hook uses pacman directly; it does not install or configure system services, drivers, kernels, or `/etc` files.
+Darwin packages are rendered into `~/.config/homebrew/Brewfile`; Linux Arch repository packages are rendered into `~/.config/pacman/packages.txt`. The Linux hook does not install or configure system services, drivers, kernels, or `/etc` files. GrepAI is installed from its official release installer into `~/.local/bin` on Linux.
