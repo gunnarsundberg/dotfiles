@@ -1,69 +1,62 @@
 ---
 name: herdr
-description: Use Herdr panes when the user wants a process or agent visible and attachable, or asks to manage Herdr workspaces, tabs, panes, or agent status. Not for ordinary short-lived advisory delegation; use OMP's built-in task tool for that.
+description: Use when a long-running process/agent benefits from visible, attachable Herdr panes, or when the user asks to inspect/control Herdr; use OMP's task tool for short-lived advisory delegation.
 ---
 
 # Herdr workflows
 
-## Choose Herdr only for visible, persistent work
-
-Use Herdr when the user wants to watch or attach to a long-running server, test run, build, or explicitly visible worker. For short-lived research/review fanout, use OMP's built-in `task` tool instead; do not create Herdr panes just to parallelize routine work.
+## Check availability
 
 Before controlling Herdr, verify that this OMP session was launched by Herdr:
 
 ```bash
-echo "HERDR_ENV=${HERDR_ENV:-unset}"
+test "${HERDR_ENV:-}" = 1
 ```
 
-If `HERDR_ENV` is not `1`, do not try Herdr commands; explain that this session lacks the Herdr connection.
+If the check fails, do not control a Herdr session from outside it. Explain the limitation and use available OMP tools instead. Use `herdr --help` when command syntax is unclear; the installed CLI is authoritative.
 
 ## Inspect before acting
 
 ```bash
-herdr pane list
+herdr status
 herdr workspace list
-herdr tab list --workspace 1
+herdr pane current --current
+herdr pane list --workspace "$HERDR_WORKSPACE_ID"
+herdr agent list
 ```
 
-Workspace IDs, tab IDs, and pane IDs can compact after closes. Re-read them before using a remembered ID. Use `--no-focus` for creates/splits unless the user requests a focus change.
+IDs are opaque handles; use IDs and state returned by Herdr rather than assuming workspace, tab, or pane numbers. `HERDR_WORKSPACE_ID` and `HERDR_PANE_ID` identify the caller's context. Use `--current` when acting on the caller's pane.
 
 ## Run visible work
-For a long-running command in a new visible pane:
+
+For a long-running shell command, split a sibling pane without changing the user's focus:
 
 ```bash
-NEW_PANE=$(herdr pane split 1-1 --direction right --no-focus | python3 -c 'import sys,json; print(json.load(sys.stdin)["result"]["pane"]["pane_id"])')
-herdr pane run "$NEW_PANE" "<command>"
-herdr pane read "$NEW_PANE" --source recent --lines 40
+herdr pane split --current --direction right --cwd "$PWD" --no-focus
 ```
 
-For a named, visible OMP worker when the user asks for one:
+Read the new pane ID from `.result.pane.pane_id`, then run and inspect the command:
 
 ```bash
-herdr agent start worker --cwd "$PWD" -- omp "<task>"
-herdr wait agent-status worker --status done --timeout 300000
-herdr pane list
-```
-
-Read the completed pane's output and report its result; Herdr panes do not deliver results into this OMP conversation automatically.
-
-## Wait and inspect
-
-```bash
-herdr wait output <pane-id> --match "ready" --timeout 30000
-herdr pane read <pane-id> --source recent --lines 80
+herdr pane run <pane-id> "<command>"
+herdr pane wait-output <pane-id> --match "ready" --timeout 30000
 herdr pane read <pane-id> --source recent-unwrapped --lines 80
 ```
 
-`recent-unwrapped` is useful when matching text that wraps in the terminal. A wait timeout exits non-zero; inspect the pane instead of claiming completion.
+Replace angle-bracket placeholders with IDs returned by Herdr. A wait timeout is not proof of failure; inspect the pane before retrying.
 
-## Manage panes and workspaces
+## Run a visible OMP worker
+
+`agent start` requires an existing shell pane at its prompt. Start the requested agent kind in that pane, then submit work:
 
 ```bash
-herdr pane send-keys <pane-id> Enter
-herdr pane send-text <pane-id> "<text>"
-herdr pane close <pane-id>
-herdr tab create --workspace <workspace-id> --label "tests" --no-focus
-herdr workspace create --cwd "$PWD" --label "api-server" --no-focus
+herdr agent start worker --kind omp --pane <pane-id>
+herdr agent prompt worker "<task>" --wait --timeout 300000
+herdr agent read worker --source recent-unwrapped --lines 80
 ```
 
-Re-list IDs after closing anything. Keep user-visible work running only as long as it remains useful; do not close or overwrite a user's existing pane without permission.
+Use a unique agent name and a kind supported by `herdr agent`. Use `herdr agent wait` for a specific lifecycle state; `agent prompt --wait` is sufficient for ordinary prompt-and-wait work.
+
+## Preserve user state
+
+Use `--no-focus` unless the user asks to change focus. Do not close or overwrite panes, tabs, or workspaces you did not create. Re-read current state before acting on remembered IDs.

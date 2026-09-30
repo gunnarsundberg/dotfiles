@@ -1,9 +1,17 @@
 ---
 name: crit
-description: Use Crit when the user requests human inline review of code, a plan, a live page, or HTML, or explicitly asks for the Crit review loop. For agent-only review, use OMP's built-in /review instead.
+description: Use Crit for human inline design review before implementation when user direction matters, or before pushing nontrivial code affecting behavior, interfaces, architecture, data handling, or security; explicit requests always qualify. For agent-only review, use OMP's built-in /review instead.
 ---
 
 # Human review with Crit
+
+## When to use Crit
+
+Use Crit before implementation when materially different product, interface, architecture, compatibility, security, or data choices remain and user feedback could change the direction. First write a concise design note; do not send an unresolved prompt to review.
+
+Use Crit before pushing nontrivial code that changes observable behavior, interfaces, architecture, data handling, or security. Skip trivial mechanical changes and docs-only changes unless the user asks. Explicit Crit requests always qualify.
+
+Do not push while Crit comments remain unresolved unless the user explicitly directs it. Agent-only feedback belongs in OMP `/review`, not Crit.
 
 Choose arguments from the request and current context; do not ask the user to select a Crit mode:
 

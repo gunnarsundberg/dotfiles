@@ -1,0 +1,14 @@
+---
+name: design-discovery
+description: Use before implementation when repository context still leaves materially different product, interface, compatibility, security, or architectural choices unresolved; skip for clear bounded work and read-only investigations.
+---
+
+# Design discovery
+
+Use this skill only when an unresolved choice would materially change user-visible behavior, compatibility, interfaces, security, or architecture.
+
+1. Inspect the request and relevant code, docs, and configuration first. Resolve facts from available context; do not ask the user for information the repo or tools can provide.
+2. State the goal, constraints, and any assumptions that affect the design. Keep bounded work concise; scale detail to the change.
+3. If one conservative, conventional path fits the request, choose it and proceed. Do not create a design gate for clear bounded tasks, audits, or investigations.
+4. If materially different choices remain and cannot be inferred, present the options, tradeoffs, and a recommendation. Ask only for the decision the user must make; batch related questions. When `test-driven-development` also applies, resolve the design choice first, then use its red/green workflow for the selected behavior.
+5. Do not require approval for a design write-up, a spec artifact, or implementation when the request is already clear. Do not expand scope to make an option more attractive. Continue with unaffected work while a decision is unresolved.

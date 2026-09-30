@@ -5,6 +5,6 @@ description: Use for behavior-changing features and bug fixes where a regression
 
 # Test-driven development
 
-For a behavior change, state the consumer-visible behavior and boundary case first. Add or identify a deterministic test that would fail for the missing behavior. For a reproducible bug, confirm the regression test fails for the reported reason before fixing it; do not rerun a failure the user has already reported as ground truth.
+Use this skill to select and prove a regression test when a consumer-visible contract can be tested. For an unexpected failure, first use `systematic-debugging` to establish the cause. Then state the expected behavior and boundary; add or identify a deterministic test that would catch the missing behavior. Confirm a new regression test fails for the expected reason before fixing it, but do not rerun a failure the user has already reported as ground truth.
 
-Implement the smallest change that passes the test. Run the focused test, then the broader relevant suite when appropriate. Refactor only while the tests remain green. If a failing-first test is impractical, use a direct scenario/smoke check and say so; do not add tautological tests for forwarding, copies, or incidental defaults.
+Implement the smallest change that passes. Run the focused test, then the broader relevant suite when appropriate; refactor only while tests remain green. If a useful failing-first test is impractical, use a direct scenario instead. `verification-before-completion` owns the final smoke check and evidence report; do not add tautological tests for forwarding, copies, or incidental defaults.

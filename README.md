@@ -15,7 +15,7 @@ On first use, `.chezmoi.toml.tmpl` prompts for role, Git email, SSH signing key,
 
 The package hook runs after chezmoi deploys its files and fingerprints the active role's package data, so package-list changes rerun installation. On macOS it runs `brew bundle`; on Linux it requires pacman and installs Arch repository packages with `sudo`. Install or bootstrap chezmoi itself before the first apply.
 
-Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser through fnm-managed npm, Oh My Pi (`omp`), GrepAI, and Crit on Linux; macOS installs OMP, GrepAI, and Crit from Homebrew. OMP configuration is deployed from `dot_omp`, including native Herdr/Crit skills and role-aware MCP servers. Chrome DevTools, the Fastly internal marketplace, Google Workspace MCP, and Atlassian MCP are work-only. Pi configuration remains deployed from `dot_pi`, but the Pi executable is not installed.
+Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser on work profiles only, Oh My Pi (`omp`), GrepAI, Herdr, and Crit on Linux; macOS installs OMP, GrepAI, Herdr, and Crit from Homebrew. OMP configuration is deployed from `dot_omp`, including design-discovery, debugging, TDD, verification, Herdr, and Crit skills plus role-aware MCP servers. Chrome DevTools, the Fastly internal marketplace, Google Workspace MCP, and Atlassian MCP are work-only. Pi configuration remains deployed from `dot_pi`, but the Pi executable is not installed.
 
 On Linux personal machines, the user-tool hook installs Proton Pass CLI into `~/.local/bin`. After applying, authenticate once and enable its user service:
 
@@ -52,7 +52,6 @@ dot_config/
   niri/                          # Linux desktop; T2-only settings are gated
   noctalia/                      # Linux desktop; T2 backlight setting is gated
   systemd/user/                  # personal Linux Proton Pass agent service
-  mcp/                           # role-aware MCP configuration
   nvim/                          # Neovim configuration
   process-compose/               # Darwin process configuration
   ghostty/                       # shared Ghostty configuration

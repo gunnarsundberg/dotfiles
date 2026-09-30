@@ -3,9 +3,9 @@
 ## Use built-in capabilities first
 
 - Prefer OMP's `read`, `grep`, `glob`, `find`, LSP, browser, and web tools over installing extensions that duplicate them.
-- Use the built-in `task` tool for independent short-lived work. Use Herdr when work should be visible or attachable.
+- Use Herdr when long-running work benefits from a visible, attachable pane/workspace, even if the user does not name Herdr. Use the built-in `task` tool for ordinary independent short-lived work.
 - Use `jj` in repositories that contain `.jj/`; otherwise use the repository's normal version-control tool.
-- Use OMP's built-in `/review` for agent review. Use Crit when human inline review or Crit-specific publishing is requested.
+- Use OMP `/review` for agent-only review. Use Crit proactively before implementation when materially different product, interface, architecture, compatibility, security, or data choices need user direction; prepare a concise design note first. Use Crit before pushing nontrivial code that changes behavior, interfaces, architecture, data handling, or security. Skip trivial or docs-only changes unless the user asks. Do not push with unresolved Crit comments unless the user explicitly directs it.
 
 ## Web research
 

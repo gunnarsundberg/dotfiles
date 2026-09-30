@@ -21,6 +21,13 @@ if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/omp" ]; then
 fi
 {{ end }}
 {{ if eq .chezmoi.os "linux" }}
+if ! command -v herdr >/dev/null 2>&1 && [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/herdr" ]; then
+    echo "Installing Herdr..."
+    curl -fsSL https://herdr.dev/install.sh | HERDR_INSTALL_DIR="{{ .chezmoi.homeDir }}/.local/bin" sh
+fi
+{{ end }}
+
+{{ if eq .chezmoi.os "linux" }}
 if ! command -v crit >/dev/null 2>&1 && [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/crit" ]; then
     case "$(uname -m)" in
         x86_64|amd64) CRIT_ARCH=amd64 ;;
@@ -40,11 +47,19 @@ if ! command -v crit >/dev/null 2>&1 && [ ! -x "{{ .chezmoi.homeDir }}/.local/bi
 fi
 {{ end }}
 
+{{ if eq .role "work" }}
 AGENT_BROWSER="{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/agent-browser"
 if [ ! -x "$AGENT_BROWSER" ]; then
     echo "Installing agent-browser through fnm-managed npm..."
     fnm exec --using=default npm install -g agent-browser
 fi
+{{ else }}
+AGENT_BROWSER="{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/agent-browser"
+if [ -x "$AGENT_BROWSER" ]; then
+    echo "Removing agent-browser from personal profile..."
+    fnm exec --using=default npm uninstall -g agent-browser
+fi
+{{ end }}
 
 {{ if eq .role "work" }}
 if ! command -v dagger >/dev/null 2>&1; then
