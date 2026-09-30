@@ -1,59 +1,27 @@
 tap "yoanbernabeu/tap", trusted: true
 tap "f1bonacc1/tap", trusted: true
 tap "can1357/tap", trusted: true
-{{- if eq .role "personal" }}
+{{ if eq .role "personal" }}
 tap "protonpass/tap", trusted: true
-{{- end }}
-{{- if eq .role "work" }}
+{{ end }}
+{{ if eq .role "work" }}
 tap "infrahq/tap", trusted: true
 tap "hashicorp/tap", trusted: true
-{{- end }}
+{{ end }}
 
-brew "chezmoi"
-brew "coreutils"
-brew "fish"
-brew "fnm"
-brew "neovim"
-brew "git"
-brew "jujutsu"
-brew "gh"
-brew "fzf"
-brew "zoxide"
-brew "eza"
-brew "ripgrep"
-brew "fd"
-brew "bat"
-brew "buf"
-brew "grepai"
-brew "crit"
-brew "process-compose"
-brew "herdr"
-brew "rtk"
-brew "omp"
-{{- if eq .role "personal" }}
-brew "pass-cli"
-brew "docker-credential-helper"
-{{- end }}
-{{- if eq .role "work" }}
-brew "hashicorp/tap/vault"
-brew "container"
-brew "gimme-aws-creds"
-{{- end }}
+{{ range .packages.common }}
+brew "{{ . }}"
+{{ end }}
+{{ range .packages.darwin.formula }}
+brew "{{ . }}"
+{{ end }}
+{{ range index .packages.darwin.roles .role "formula" }}
+brew "{{ . }}"
+{{ end }}
 
-brew "k9s"
-brew "kubernetes-cli"
-brew "helm"
-{{- if eq .role "work" }}
-brew "infra"
-{{- end }}
-
-cask "ghostty"
-cask "vicinae"
-cask "lm-studio"
-cask "openlogi"
-{{- if eq .role "work" }}
-cask "claude-code"
-cask "1password"
-cask "1password-cli"
-cask "gcloud-cli"
-{{- end }}
+{{ range .packages.darwin.cask }}
+cask "{{ . }}"
+{{ end }}
+{{ range index .packages.darwin.roles .role "cask" }}
+cask "{{ . }}"
+{{ end }}

@@ -1,21 +1,21 @@
 {
   "mcpServers": {
-		{{- if eq .role "work" }}
-		"google-workspace": {
-		  "command": "bash",
-			"args": ["/Users/gunnar/.pi/agent/git/github.com/fastly/agent-skills-internal/plugins/google-workspace/scripts/run.sh"]
-		},
-		"atlassian": {
-      "url": "https://cf.mcp.atlassian.com/v1/mcp"
-		},
-		{{- end }}
     "chrome-devtools": {
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp@latest"]
     },
-		"grepai": {
+    "grepai": {
       "command": "grepai",
       "args": ["mcp-serve"]
     }
+{{ if eq .role "work" }},
+    "google-workspace": {
+      "command": "bash",
+      "args": ["{{ .chezmoi.homeDir }}/.pi/agent/git/github.com/fastly/agent-skills-internal/plugins/google-workspace/scripts/run.sh"]
+    },
+    "atlassian": {
+      "url": "https://cf.mcp.atlassian.com/v1/mcp"
+    }
+{{ end }}
   }
 }

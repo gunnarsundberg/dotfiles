@@ -1,0 +1,7 @@
+[shell]
+polkit_agent = true
+{{ if .features.t2 }}
+[brightness.monitor.eDP-1]
+backend = "backlight"
+backlight_device = "gmux_backlight"
+{{ end }}

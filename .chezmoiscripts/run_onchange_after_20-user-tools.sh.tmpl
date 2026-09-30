@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+{{ if and (eq .chezmoi.os "linux") (eq .role "personal") }}
+if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/pass-cli" ]; then
+    echo "Installing Proton Pass CLI..."
+    curl -fsSL https://proton.me/download/pass-cli/install.sh | PROTON_PASS_CLI_INSTALL_DIR="{{ .chezmoi.homeDir }}/.local/bin" bash
+fi
+{{ end }}
+
+AGENT_BROWSER="{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/agent-browser"
+if [ ! -x "$AGENT_BROWSER" ]; then
+    echo "Installing agent-browser through fnm-managed npm..."
+    fnm exec --using=default npm install -g agent-browser
+fi
+
+{{ if eq .role "work" }}
+if ! command -v dagger >/dev/null 2>&1; then
+    echo "Installing Dagger..."
+    mkdir -p "{{ .chezmoi.homeDir }}/.local/bin"
+    curl -fsSL https://dl.dagger.io/dagger/install.sh | DAGGER_VERSION=0.21.9 BIN_DIR="{{ .chezmoi.homeDir }}/.local/bin" sh
+fi
+{{ end }}
+

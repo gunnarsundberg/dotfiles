@@ -1,0 +1,25 @@
+README.md
+.gitignore
+
+{{ if ne .chezmoi.os "darwin" }}
+.config/homebrew
+Library
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.config/pacman
+.config/niri
+.config/noctalia
+{{ end }}
+
+{{ if or (ne .chezmoi.os "linux") (ne .role "personal") }}
+.config/systemd/user/proton-pass-ssh-agent.service
+{{ end }}
+
+{{ if eq .chezmoi.os "linux" }}
+.config/process-compose
+{{ end }}
+
+{{ if ne .role "work" }}
+.config/vicinae/settings.json
+{{ end }}

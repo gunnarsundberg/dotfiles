@@ -1,0 +1,13 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+set -eu
+# Pacman manifest: {{ include "dot_config/pacman/packages.txt.tmpl" | sha256sum }}
+if ! command -v pacman >/dev/null 2>&1; then
+    echo "Linux package installation requires pacman (Arch/CachyOS)." >&2
+    exit 1
+fi
+xargs -r sudo pacman -S --needed --noconfirm < "{{ .chezmoi.homeDir }}/.config/pacman/packages.txt"
+{{- else -}}
+#!/bin/sh
+exit 0
+{{- end }}

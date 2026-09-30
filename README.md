@@ -1,155 +1,69 @@
-# Gunnar's Nix Config
+# Gunnar's dotfiles
 
-Personal macOS configuration using [nix-darwin](https://github.com/LnL7/nix-darwin) and
-[home-manager](https://github.com/nix-community/home-manager). This repo is the base layer;
-work-specific config lives in a separate `work-dotfiles` repo that imports `homeModules.base`
-and `darwinModules.common` from here.
+This repository is a [chezmoi](https://www.chezmoi.io/) source directory. It manages user-level configuration shared between macOS and Linux, with machine role (`personal` or `work`) separate from OS. Chezmoi detects the OS; role, Git identity, and hardware capabilities are local machine data, not repository-wide settings.
 
-## First-time setup
+## Bootstrap
 
-```sh
-# 1. Install Nix (Determinate Systems installer)
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-
-# 2. Restart your shell, then clone this repo
-jj git clone <repo-url> ~/.config/nix-config
-
-# 3. Bootstrap nix-darwin (first run only — installs the darwin-rebuild command)
-nix run nix-darwin -- switch --flake ~/.config/nix-config
-
-# 4. All subsequent rebuilds
-darwin-rebuild switch --flake ~/.config/nix-config
-```
-
-## Updating inputs
+Install chezmoi using the operating system's package manager, then initialize and apply this source:
 
 ```sh
-nix flake update            # update all inputs (nixpkgs, home-manager, forgecode, etc.)
-darwin-rebuild switch --flake ~/.config/nix-config
+chezmoi init <repo-url>
+chezmoi apply
 ```
 
-To update a single input:
+On first use, `.chezmoi.toml.tmpl` prompts for role, Git email, SSH signing key, and whether the machine has Apple T2 hardware. Leave the signing-key value blank if SSH signing is not configured; Git signing is then disabled. Prompts populate local chezmoi data. To review or change those values later, edit `~/.config/chezmoi/chezmoi.toml`, then run `chezmoi apply`.
+
+The package hook runs after chezmoi deploys its files. On macOS it runs `brew bundle`; on Linux it requires `pacman` and installs the generated package list with `sudo`. The Linux package list targets Arch-based systems. Install or bootstrap chezmoi itself before the first apply.
+
+Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser through fnm-managed npm. Pi configuration remains deployed from `dot_pi`, but the Pi executable is not installed.
+
+On Linux personal machines, the user-tool hook installs Proton Pass CLI into `~/.local/bin`. After applying, authenticate once and enable its user service:
 
 ```sh
-nix flake update forgecode
+pass-cli login
+systemctl --user enable --now proton-pass-ssh-agent.service
 ```
 
-## Adding a new machine
+Fish exports `SSH_AUTH_SOCK="$HOME/.ssh/proton-pass-agent.sock"`; the systemd service creates that socket. On macOS, the existing LaunchAgent starts process-compose with the same socket path.
 
-1. Create `hosts/<hostname>.nix` with host-specific settings (system packages, hostname, etc.)
-2. Add a `darwinConfigurations."<hostname>"` entry in `flake.nix`
-3. Set the `profile` specialArg to `"personal"`, `"work"`, or `"server"`
-4. Run `nix run nix-darwin -- switch --flake ~/.config/nix-config` on the new machine
+## Updating
 
-## Profile system
+```sh
+chezmoi update   # pull source changes and apply them
+chezmoi diff     # review pending changes
+chezmoi apply
+```
 
-All home-manager modules receive a `profile` argument. Use it for conditional config:
-
-| Value | Machine | Notes |
-|---|---|---|
-| `"personal"` | Personal Intel Mac | Anthropic API key via env var |
-| `"work"` | Work machine (via work-dotfiles) | Bedrock via AWS SSO |
-| `"server"` | Headless Linux | AI tools excluded |
+Edit tracked configuration in the source directory (`chezmoi cd`). Use `chezmoi edit <target>` to edit the source for a managed target, and `chezmoi apply` to deploy it.
 
 ## Structure
 
-```
-flake.nix                     # Entry point — declares machines and exports reusable modules
-hosts/
-  darwin-common.nix           # Shared macOS settings (Homebrew, system defaults, fonts)
-  macbook-pro.nix             # Personal MacBook Pro (x86_64-darwin)
-home/
-  default.nix                 # Home-manager entry — packages, env vars, forgecode option
-  shell.nix                   # Fish, fzf, zoxide, direnv
-  git.nix                     # Git + jujutsu (SSH signing via 1Password, profile-aware)
-  tmux.nix                    # Tmux config
-  neovim.nix                  # Neovim (symlinks nvim/ into ~/.config/nvim)
-  ai-agents.nix               # Pi + Forge — declarative AI tooling (see AI Tools below)
-  nvim/                       # Lua config, symlinked verbatim
-  pi/
-    AGENTS.md                 # Global Pi context file (when to delegate to Forge)
-    extensions/
-      forge-agent.ts          # Pi extension: registers the `forge` tool
-  forge/
-    agents/
-      pi-delegate.md          # Forge agent definition for Pi-delegated tasks
-    commands/
-      check.md                # /check custom command (lint + test + fix)
-shells/
-  base-go.nix                 # Composable Go dev shell
-  base-python.nix             # Composable Python dev shell
-  base-rust.nix               # Composable Rust dev shell
+```text
+.chezmoi.toml.tmpl              # local role, Git identity, hardware prompts
+.chezmoiignore.tmpl             # OS/role-specific deployment exclusions
+.chezmoidata/packages.yaml      # shared, OS-specific, and role-specific packages
+.chezmoiscripts/                # package and user-tool lifecycle hooks
+dot_config/
+  git/config.tmpl               # shared Git settings, role/OS overlays
+  private_fish/                 # deploys to ~/.config/fish
+  private_jj/                   # deploys to ~/.config/jj
+  homebrew/Brewfile.tmpl         # Darwin package manifest
+  pacman/packages.txt.tmpl      # Linux package manifest
+  niri/                          # Linux desktop; T2-only settings are gated
+  noctalia/                      # Linux desktop; T2 backlight setting is gated
+  systemd/user/                  # personal Linux Proton Pass agent service
+  mcp/                           # role-aware MCP configuration
+  nvim/                          # Neovim configuration
+  process-compose/               # Darwin process configuration
+  ghostty/                       # shared Ghostty configuration
+dot_pi/                          # Pi settings and agent instructions
+private_Library/LaunchAgents/    # macOS-only LaunchAgents
 ```
 
-> **Note:** `darwin-common.nix` and `default.nix` at the repo root are dead code from an
-> earlier layout. They are not imported by `flake.nix` and can be ignored.
+The Niri and Noctalia files were imported from the current Linux desktop. `.chezmoiignore.tmpl` excludes them from Darwin, excludes Homebrew files and LaunchAgents outside Darwin, and excludes the pacman manifest outside Linux. T2-specific keybindings, `tiny-dfr` startup, and Noctalia backlight configuration are conditional on local `features.t2` data. The Linux agent service is only deployed for personal-role machines; macOS keeps its LaunchAgent and process-compose configuration.
 
-## AI Tools
+## Package lists
 
-This config declaratively manages two AI coding tools: **Pi** (orchestrator/TUI) and
-**Forge** (coding agent). They are set up to work together: Pi delegates coding tasks to
-Forge via a custom extension.
+`.chezmoidata/packages.yaml` separates packages with the same package-manager name on both systems (`common`) from manager-specific lists (`darwin.formula`, `darwin.cask`, and `linux.pacman`). Role-specific packages live under each OS's `roles` mapping. Keep a package in `common` only when the same package name and install intent apply to both systems; put naming or manager differences in the corresponding OS list.
 
-### What gets installed
-
-- **Pi** (`~/.pi/`) — installed from the official GitHub release tarball (self-contained
-  binary, no Node.js or Bun required). Settings at `~/.pi/agent/settings.json` are a
-  read-only Nix store symlink.
-- **Forge** (`~/.forge/`) — installed via the `forgecode` flake input. The `pi-delegate`
-  agent and `/check` command are placed into `~/.forge/` as individual symlinks; credentials
-  and conversation history remain mutable.
-
-### Provider configuration (profile-conditioned)
-
-| Profile | Provider | How to authenticate |
-|---|---|---|
-| `personal` | Anthropic direct | Set `ANTHROPIC_API_KEY` in shell env |
-| `work` | AWS Bedrock | `aws sso login --profile bedrock` |
-
-### Pi extension: the `forge` tool
-
-`home/pi/extensions/forge-agent.ts` registers a `forge` tool that Pi's LLM can call.
-When Pi decides a task needs code changes, it calls this tool, which spawns
-`forge --agent <x> -p "..."` as a subprocess and streams the output back to the Pi TUI.
-
-| Agent flag | Use case |
-|---|---|
-| `sage` | Read-only research — no file changes |
-| `muse` | Planning and impact analysis |
-| `forge` | Implementation (default) |
-
-### Managing Pi extensions at runtime
-
-Pi's `settings.json` and `~/.config/ai/pi/extensions/` are read-only Nix store symlinks.
-Use `darwin-rebuild switch` to deploy changes, then `/reload` in a running Pi session to
-pick them up without restarting.
-
-For extensions under active development, drop `.ts` files directly into
-`~/.pi/agent/extensions/` (mutable, auto-discovered by Pi) and use `/reload`. Once stable,
-move them into `home/pi/extensions/` and deploy via Nix.
-
-To add a third-party Pi package, add it to the `packages` array in `home/ai-agents.nix`
-rather than running `pi install` (which would try to write to the read-only `settings.json`).
-
-### Upgrading Pi
-
-Bump `piVersion` in `home/ai-agents.nix` and update both `sha256` hashes:
-
-```sh
-nix-prefetch-url --type sha256 \
-  https://github.com/earendil-works/pi/releases/download/vVER/pi-darwin-arm64.tar.gz
-nix-prefetch-url --type sha256 \
-  https://github.com/earendil-works/pi/releases/download/vVER/pi-darwin-x64.tar.gz
-```
-
-## Exported modules
-
-`flake.nix` exports two reusable modules consumed by `work-dotfiles`:
-
-```nix
-darwinModules.common   # ./hosts/darwin-common.nix
-homeModules.base       # ./home  (the entire home directory)
-```
-
-Any module added to `home/` and imported in `home/default.nix` automatically flows to
-machines that consume `homeModules.base`.
+Darwin packages are rendered into `~/.config/homebrew/Brewfile`. Linux packages are rendered into `~/.config/pacman/packages.txt`. The Linux hook uses pacman directly; it does not install or configure system services, drivers, kernels, or `/etc` files.

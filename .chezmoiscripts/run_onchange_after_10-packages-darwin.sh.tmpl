@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+set -eu
+# Brewfile: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
+brew bundle --file="{{ .chezmoi.homeDir }}/.config/homebrew/Brewfile"
+{{- else -}}
+#!/bin/sh
+exit 0
+{{- end }}

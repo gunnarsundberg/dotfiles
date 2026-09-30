@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+if [ ! -x "{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/npm" ]; then
+    fnm install --lts
+    fnm default lts-latest
+fi

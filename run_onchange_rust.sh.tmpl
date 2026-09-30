@@ -1,3 +1,9 @@
 #!/bin/sh
+set -eu
+
+if command -v rustup >/dev/null 2>&1; then
+  echo "rustup already installed, skipping"
+  exit 0
+fi
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh

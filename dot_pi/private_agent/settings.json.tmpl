@@ -17,9 +17,9 @@
     "{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/npm"
   ],
   "packages": [
-		{{- if eq .role "work" }}
+{{ if eq .role "work" }}
     "git:github.com/fastly/agent-skills-internal",
-		{{- end }}
+{{ end }}
     "git:github.com/obra/superpowers",
     "npm:pi-subagents",
     "npm:pi-intercom",

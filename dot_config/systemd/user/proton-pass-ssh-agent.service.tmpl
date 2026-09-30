@@ -1,0 +1,11 @@
+[Unit]
+Description=Proton Pass SSH agent
+
+[Service]
+Type=simple
+ExecStart={{ .chezmoi.homeDir }}/.local/bin/pass-cli ssh-agent start --socket-path {{ .chezmoi.homeDir }}/.ssh/proton-pass-agent.sock
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,62 @@
+packages:
+  common:
+    - bat
+    - fd
+    - fzf
+    - ripgrep
+    - fish
+    - neovim
+    - git
+    - jujutsu
+    - zoxide
+    - eza
+    - k9s
+    - helm
+
+  darwin:
+    formula:
+      - chezmoi
+      - coreutils
+      - fnm
+      - gh
+      - buf
+      - grepai
+      - crit
+      - process-compose
+      - herdr
+      - rtk
+      - omp
+      - kubernetes-cli
+    cask:
+      - ghostty
+      - vicinae
+      - lm-studio
+      - openlogi
+    roles:
+      personal:
+        formula:
+          - pass-cli
+          - docker-credential-helper
+        cask: []
+      work:
+        formula:
+          - hashicorp/tap/vault
+          - container
+          - gimme-aws-creds
+          - infra
+        cask:
+          - claude-code
+          - 1password
+          - 1password-cli
+          - gcloud-cli
+
+  linux:
+    pacman:
+      - fnm
+      - github-cli
+      - kubectl
+    roles:
+      personal:
+        pacman: []
+      work:
+        pacman: []

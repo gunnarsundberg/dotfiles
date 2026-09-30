@@ -1,0 +1,12 @@
+{{- $role := promptChoiceOnce . "role" "Machine role" (list "personal" "work") -}}
+{{- $email := promptStringOnce . "email" "Git email" "gunnarsundberg@pm.me" -}}
+{{- $signingKey := promptStringOnce . "gitSigningKey" "Git SSH signing key (public key or path; leave blank to disable signing)" "" -}}
+{{- $t2 := promptBoolOnce . "features.t2" "Is this machine an Apple T2 Mac?" -}}
+
+[data]
+role = {{ $role | quote }}
+email = {{ $email | quote }}
+gitSigningKey = {{ $signingKey | quote }}
+
+[data.features]
+t2 = {{ $t2 }}

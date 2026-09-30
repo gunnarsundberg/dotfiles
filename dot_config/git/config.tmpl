@@ -2,15 +2,19 @@
 	autosetuprebase = always
 
 [commit]
+{{ if .gitSigningKey }}
 	gpgSign = true
+{{ else }}
+	gpgSign = false
+{{ end }}
 
 [gpg]
 	format = "ssh"
-{{- if eq .role "work" }}
+{{ if and .gitSigningKey (eq .role "work") (eq .chezmoi.os "darwin") }}
 
 [gpg "ssh"]
 	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-{{- end }}
+{{ end }}
 
 [init]
 	defaultBranch = "main"
@@ -23,18 +27,24 @@
 	default = "current"
 
 [tag]
+{{ if .gitSigningKey }}
 	gpgSign = true
+{{ else }}
+	gpgSign = false
+{{ end }}
 
 [url "ssh://git@github.com/"]
 	insteadOf = "https://github.com/"
-{{- if eq .role "work" }}
+{{ if eq .role "work" }}
 [url "git@github.com:fastly"]
 	insteadof = https://github.com/fastly
 [url "git@github.com:signalsciences"]
 	insteadof = https://github.com/signalsciences
-{{- end }}
+{{ end }}
 
 [user]
-	email = {{- .email | quote }} 
+	email = {{ .email | quote }}
 	name = "Gunnar Sundberg"
-	signingKey = {{- .git.signingkey | quote }}
+{{ if .gitSigningKey }}
+	signingKey = {{ .gitSigningKey | quote }}
+{{ end }}
