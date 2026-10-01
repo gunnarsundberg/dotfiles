@@ -67,6 +67,9 @@ packages:
           - protonmail-bridge
           - tailscale
           - element-desktop
+          - helmfile
+          - curl
+          - jq
         aur:
           - jellyfin-tui
       work:

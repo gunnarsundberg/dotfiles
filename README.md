@@ -85,6 +85,9 @@ private_Library/LaunchAgents/    # macOS-only LaunchAgents
 
 The Niri and Noctalia files were imported from the current Linux desktop. `.chezmoiignore.tmpl` excludes them from Darwin, excludes Homebrew files and LaunchAgents outside Darwin, and excludes the pacman manifest outside Linux. T2-specific keybindings and Noctalia backlight configuration are conditional on local `features.t2` data. T2 Linux packages are also hardware-gated; `tiny-dfr` starts through package-provided udev/systemd rules, while `t2fanrd` requires one-time service enablement. The Linux agent service is only deployed for personal-role machines; macOS keeps its LaunchAgent and process-compose configuration. Tailscale is installed only for personal-role machines, with CachyOS's system service enabled manually as documented above and macOS startup managed through Login Items.
 
+On personal Linux machines, the user-tools hook installs Vicinae under `~/.local` using the upstream installer and enables its systemd user service for `graphical-session.target`; the service restarts automatically. Niri binds `Mod+Space` to Vicinae, while Noctalia's built-in launcher remains on `Mod+CTRL+Return`. The service PATH includes fnm's default Node runtime.
+
+
 ## Package lists
 
 `.chezmoidata/packages.yaml` separates packages with the same package-manager name on both systems (`common`) from manager-specific lists (`darwin.formula`, `darwin.cask`, and `linux.pacman`). Role-specific packages live under each OS's `roles` mapping; Linux roles may also include AUR packages installed by Shelly. `linux.t2.pacman` holds T2-hardware packages controlled by `features.t2`. Keep a package in `common` only when the same package name and install intent apply to both systems; put naming or manager differences in the corresponding OS list.

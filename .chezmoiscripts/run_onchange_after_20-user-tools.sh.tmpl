@@ -47,6 +47,16 @@ if ! command -v crit >/dev/null 2>&1 && [ ! -x "{{ .chezmoi.homeDir }}/.local/bi
 fi
 {{ end }}
 
+{{ if and (eq .chezmoi.os "linux") (eq .role "personal") }}
+VICINAE="{{ .chezmoi.homeDir }}/.local/bin/vicinae"
+if [ ! -x "$VICINAE" ]; then
+    echo "Installing Vicinae..."
+    curl -fsSL https://vicinae.com/install | bash -s -- --prefix "{{ .chezmoi.homeDir }}/.local"
+fi
+systemctl --user daemon-reload
+systemctl --user enable --now vicinae.service
+{{ end }}
+
 {{ if eq .role "work" }}
 AGENT_BROWSER="{{ .chezmoi.homeDir }}/.local/share/fnm/aliases/default/bin/agent-browser"
 if [ ! -x "$AGENT_BROWSER" ]; then
