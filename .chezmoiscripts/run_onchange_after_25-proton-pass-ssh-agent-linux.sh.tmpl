@@ -1,0 +1,22 @@
+{{ if and (eq .chezmoi.os "linux") (eq .role "personal") -}}
+#!/bin/sh
+set -eu
+# Proton Pass SSH agent service: {{ include "dot_config/systemd/user/proton-pass-ssh-agent.service.tmpl" | sha256sum }}
+
+if ! command -v systemctl >/dev/null 2>&1; then
+    echo "Proton Pass SSH agent setup requires systemctl." >&2
+    exit 1
+fi
+
+if [ ! -x "{{ .chezmoi.homeDir }}/.local/bin/pass-cli" ]; then
+    echo "Proton Pass CLI is not installed; skipping SSH agent service setup." >&2
+    exit 0
+fi
+
+systemctl --user daemon-reload
+systemctl --user reset-failed proton-pass-ssh-agent.service >/dev/null 2>&1 || true
+systemctl --user enable --now proton-pass-ssh-agent.service
+{{- else -}}
+#!/bin/sh
+exit 0
+{{- end }}
