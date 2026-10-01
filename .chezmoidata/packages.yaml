@@ -37,6 +37,7 @@ packages:
         formula:
           - pass-cli
           - docker-credential-helper
+          - mosh
         cask:
           - thunderbird
           - proton-mail-bridge
@@ -72,6 +73,7 @@ packages:
           - helmfile
           - curl
           - jq
+          - mosh
         aur:
           - jellyfin-tui
       work:

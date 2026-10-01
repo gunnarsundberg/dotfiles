@@ -87,6 +87,9 @@ The Niri and Noctalia files were imported from the current Linux desktop. `.chez
 
 On personal Linux machines, the user-tools hook installs Vicinae under `~/.local` using the upstream installer and enables its systemd user service for `graphical-session.target`; the service restarts automatically. Niri binds `Mod+Space` to Vicinae, while Noctalia's built-in launcher remains on `Mod+CTRL+Return`. The service PATH includes fnm's default Node runtime.
 
+Mosh is included in personal Linux and macOS package lists. On `mbp-cachy`, Tailscale SSH handles its SSH bootstrap, and UFW permits TCP 22 plus UDP 60000–61000 only on `tailscale0`; the OpenSSH daemon remains disabled. Headscale's SSH policy allows the `gunnar` user from `gunnar@` devices to this tagged host, without changing the tailnet's allow-all node traffic.
+On GrapheneOS, install Mosh in Termux with `pkg install mosh`, connect Tailscale to the same Headscale tailnet, then run `mosh gunnar@mbp-cachy`.
+
 
 ## Package lists
 
