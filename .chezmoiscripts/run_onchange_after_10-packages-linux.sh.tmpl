@@ -6,7 +6,10 @@ if ! command -v pacman >/dev/null 2>&1; then
     echo "Linux package installation requires pacman (Arch/CachyOS)." >&2
     exit 1
 fi
-xargs -r sudo pacman -S --needed --noconfirm < "{{ .chezmoi.homeDir }}/.config/pacman/packages.txt"
+missing_packages="$(pacman -T $(cat "{{ .chezmoi.homeDir }}/.config/pacman/packages.txt") || true)"
+if [ -n "$missing_packages" ]; then
+    printf '%s\n' "$missing_packages" | xargs -r sudo pacman -S --needed --noconfirm
+fi
 {{- else -}}
 #!/bin/sh
 exit 0
