@@ -65,6 +65,8 @@ packages:
           - thunderbird
           - protonmail-bridge
           - tailscale
+        aur:
+          - jellyfin-tui
       work:
         pacman: []
         aur: []

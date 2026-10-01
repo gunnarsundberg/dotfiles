@@ -13,7 +13,7 @@ chezmoi apply
 
 On first use, `.chezmoi.toml.tmpl` prompts for role, Git email, SSH signing key, and whether the machine has Apple T2 hardware. Leave the signing-key value blank if SSH signing is not configured; Git signing is then disabled. Prompts populate local chezmoi data. To review or change those values later, edit `~/.config/chezmoi/chezmoi.toml`, then run `chezmoi apply`.
 
-The package hook runs after chezmoi deploys its files and fingerprints the active role's package data, so package-list changes rerun installation. On macOS it runs `brew bundle`; on Linux it requires pacman and installs Arch repository packages with `sudo`. Install or bootstrap chezmoi itself before the first apply.
+The package hooks run after chezmoi deploys its files and fingerprint active package selections, so package-list changes rerun installation. On macOS the standard hook runs `brew bundle`; on Linux one hook installs Arch repository packages with `pacman`, and a separate hook installs role-specific AUR packages with Shelly. CachyOS includes Shelly. Install or bootstrap chezmoi itself before the first apply.
 
 Node.js is installed through `fnm` on both platforms, and `fnm` selects the current LTS version. npm is used only from that fnm-managed Node installation; no system npm package is installed. The user-tool hook installs agent-browser on work profiles only, Oh My Pi (`omp`), GrepAI, Herdr, and Crit on Linux; macOS installs OMP, GrepAI, Herdr, and Crit from Homebrew. OMP configuration is deployed from `dot_omp`, including design-discovery, debugging, TDD, verification, Herdr, and Crit skills plus role-aware MCP servers. Chrome DevTools, the Fastly internal marketplace, Google Workspace MCP, and Atlassian MCP are work-only.
 

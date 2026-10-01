@@ -1,0 +1,19 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+set -eu
+# AUR package data: {{ printf "%q" (index .packages.linux.roles .role "aur") | sha256sum }}
+{{ $aurPackages := index .packages.linux.roles .role "aur" -}}
+{{ if $aurPackages -}}
+if ! command -v shelly >/dev/null 2>&1; then
+    echo "Installing AUR packages requires Shelly." >&2
+    exit 1
+fi
+shelly install aur --needed{{ range $aurPackages }} {{ . }}{{ end }}
+{{- else -}}
+#!/bin/sh
+exit 0
+{{- end }}
+{{- else -}}
+#!/bin/sh
+exit 0
+{{- end }}
