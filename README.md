@@ -26,6 +26,18 @@ systemctl --user enable --now proton-pass-ssh-agent.service
 
 Fish exports `SSH_AUTH_SOCK="$HOME/.ssh/proton-pass-agent.sock"`; the systemd service creates that socket. On macOS, the existing LaunchAgent starts process-compose with the same socket path.
 
+Tailscale is included in the personal package profile on both platforms. On CachyOS, after applying, enable and start the system daemon once:
+
+```sh
+sudo systemctl enable --now tailscaled
+```
+
+Sign in to your tailnet once with Tailscale. The system service starts at boot and runs without a user session.
+
+On macOS, launch Tailscale after installation, complete its onboarding, approve the VPN/system extension if prompted, and sign in. Enable Tailscale in **System Settings → General → Login Items** so it starts when you log in. The macOS app runs in the logged-in user session; it does not provide a system daemon for pre-login access.
+
+Verify connectivity with `tailscale status`. On CachyOS, `systemctl is-enabled tailscaled` and `systemctl is-active tailscaled` verify boot enablement and current service state.
+
 ## Updating
 
 ```sh

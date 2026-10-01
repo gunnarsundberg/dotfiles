@@ -40,6 +40,7 @@ packages:
         cask:
           - thunderbird
           - proton-mail-bridge
+          - tailscale
       work:
         formula:
           - hashicorp/tap/vault
@@ -63,5 +64,6 @@ packages:
         pacman:
           - thunderbird
           - protonmail-bridge
+          - tailscale
       work:
         pacman: []
