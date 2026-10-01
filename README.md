@@ -38,6 +38,18 @@ On macOS, launch Tailscale after installation, complete its onboarding, approve 
 
 Verify connectivity with `tailscale status`. On CachyOS, `systemctl is-enabled tailscaled` and `systemctl is-active tailscaled` verify boot enablement and current service state.
 
+## T2 Linux setup
+
+When `features.t2` is enabled on Linux, the pacman manifest installs `tiny-dfr` and `t2fanrd`; use a pacman repository that provides these T2 packages (CachyOS does). The `tiny-dfr` package starts its system service from udev when the Touch Bar devices appear, so no Niri startup entry or manual service enablement is needed.
+
+After applying on a T2 Linux machine, enable the fan controller once:
+
+```sh
+sudo systemctl enable --now t2fanrd.service
+```
+
+`t2fanrd` reads its optional fan curve from `/etc/t2fand.conf`. Chezmoi does not manage this root-owned system configuration. This CachyOS installation also has local suspend/resume units for `t2fanrd` and `tiny-dfr`; their behavior is not managed by chezmoi and should be validated on each kernel/device before copying them elsewhere.
+
 ## Updating
 
 ```sh
@@ -71,10 +83,12 @@ dot_omp/agent/                 # OMP configuration, MCP servers, and native skil
 private_Library/LaunchAgents/    # macOS-only LaunchAgents
 ```
 
-The Niri and Noctalia files were imported from the current Linux desktop. `.chezmoiignore.tmpl` excludes them from Darwin, excludes Homebrew files and LaunchAgents outside Darwin, and excludes the pacman manifest outside Linux. T2-specific keybindings, `tiny-dfr` startup, and Noctalia backlight configuration are conditional on local `features.t2` data. The Linux agent service is only deployed for personal-role machines; macOS keeps its LaunchAgent and process-compose configuration.
+The Niri and Noctalia files were imported from the current Linux desktop. `.chezmoiignore.tmpl` excludes them from Darwin, excludes Homebrew files and LaunchAgents outside Darwin, and excludes the pacman manifest outside Linux. T2-specific keybindings and Noctalia backlight configuration are conditional on local `features.t2` data. T2 Linux packages are also hardware-gated; `tiny-dfr` starts through package-provided udev/systemd rules, while `t2fanrd` requires one-time service enablement. The Linux agent service is only deployed for personal-role machines; macOS keeps its LaunchAgent and process-compose configuration. Tailscale is installed only for personal-role machines, with CachyOS's system service enabled manually as documented above and macOS startup managed through Login Items.
 
 ## Package lists
 
-`.chezmoidata/packages.yaml` separates packages with the same package-manager name on both systems (`common`) from manager-specific lists (`darwin.formula`, `darwin.cask`, and `linux.pacman`). Role-specific packages live under each OS's `roles` mapping. Keep a package in `common` only when the same package name and install intent apply to both systems; put naming or manager differences in the corresponding OS list.
+`.chezmoidata/packages.yaml` separates packages with the same package-manager name on both systems (`common`) from manager-specific lists (`darwin.formula`, `darwin.cask`, and `linux.pacman`). Role-specific packages live under each OS's `roles` mapping; Linux roles may also include AUR packages installed by Shelly. `linux.t2.pacman` holds T2-hardware packages controlled by `features.t2`. Keep a package in `common` only when the same package name and install intent apply to both systems; put naming or manager differences in the corresponding OS list.
 
-Darwin packages are rendered into `~/.config/homebrew/Brewfile`; Linux Arch repository packages are rendered into `~/.config/pacman/packages.txt`. The Linux hook does not install or configure system services, drivers, kernels, or `/etc` files. GrepAI is installed from its official release installer into `~/.local/bin` on Linux.
+Darwin packages are rendered into `~/.config/homebrew/Brewfile`; Linux Arch repository packages are rendered into `~/.config/pacman/packages.txt`. The Linux hook does not install or configure system services, drivers, kernels, or `/etc` files. System services and hardware configuration remain explicit privileged setup steps. GrepAI is installed from its official release installer into `~/.local/bin` on Linux.
+
+The personal Linux profile installs `jellyfin-tui` from the AUR using Shelly. This requires an AUR-enabled pacman host; Shelly interactively presents PKGBUILD review warnings before installation.

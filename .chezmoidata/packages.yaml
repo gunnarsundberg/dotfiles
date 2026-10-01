@@ -67,3 +67,8 @@ packages:
           - tailscale
       work:
         pacman: []
+        aur: []
+    t2:
+      pacman:
+        - tiny-dfr
+        - t2fanrd

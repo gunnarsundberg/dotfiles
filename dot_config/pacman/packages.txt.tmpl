@@ -2,3 +2,5 @@
 {{ end }}{{ range .packages.linux.pacman }}{{ . }}
 {{ end }}{{ range index .packages.linux.roles .role "pacman" }}{{ . }}
 {{ end }}
+{{ if .features.t2 }}{{ range .packages.linux.t2.pacman }}{{ . }}
+{{ end }}{{ end }}
