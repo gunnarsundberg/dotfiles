@@ -13,6 +13,14 @@ end
 
 status is-interactive; and begin
     fish_add_path "$HOME/.local/bin"
+
+    if command -q zoxide
+        zoxide init fish | source
+    end
+
+    if command -q eza
+        alias ls='eza -al --color=always --group-directories-first --icons=always'
+    end
 {{ if eq .chezmoi.os "darwin" }}
     set -x HOMEBREW_NO_ANALYTICS 1
 
