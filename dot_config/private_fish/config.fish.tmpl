@@ -3,8 +3,8 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 {{ end }}
 
 {{ if eq .role "personal" }}
-# Match the Proton Pass SSH agent socket exposed by the desktop app.
-set -gx SSH_AUTH_SOCK "$HOME/.ssh/proton-pass-ssh-agent.sock"
+# Match the Proton Pass SSH agent socket managed by the user service.
+set -gx SSH_AUTH_SOCK "$HOME/.ssh/proton-pass-agent.sock"
 {{ end }}
 
 status is-login; and begin
