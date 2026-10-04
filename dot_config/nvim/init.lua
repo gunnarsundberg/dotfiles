@@ -11,6 +11,12 @@ vim.o.incsearch = true
 vim.o.undofile = true
 vim.o.smartindent = true
 
+vim.filetype.add({
+	extension = {
+		h = "c",
+	},
+})
+
 --
 -- plugins
 --
@@ -34,7 +40,10 @@ require "jjsigns".setup()
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = { 'go', 'rust', 'lua', 'json', 'c', 'cpp' },
 	callback = function()
-		vim.treesitter.start()
+		local ok = pcall(vim.treesitter.start)
+		if not ok then
+			return
+		end
 		vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 		vim.wo[0][0].foldmethod = 'expr'
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
