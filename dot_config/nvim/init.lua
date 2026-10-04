@@ -32,7 +32,7 @@ require "jjsigns".setup()
 
 -- treesitter
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = { 'go', 'rust', 'lua', 'json' },
+	pattern = { 'go', 'rust', 'lua', 'json', 'c', 'cpp' },
 	callback = function()
 		vim.treesitter.start()
 		vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -109,7 +109,7 @@ map('n', '<leader>e', ":Oil<CR>")
 
 -- lsp
 --
-vim.lsp.enable({ "lua_ls", "gopls", "jsonls", "templ" })
+vim.lsp.enable({ "lua_ls", "gopls", "jsonls", "templ", "clangd" })
 
 -- Format on Save
 vim.api.nvim_create_autocmd("BufWritePre", {
