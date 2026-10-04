@@ -1,0 +1,56 @@
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+#!/bin/sh
+set -eu
+
+HELM_DIFF_VERSION=3.15.15
+HELM_DIFF_FINGERPRINT=C5645EF47482257A1F806D2BEA17A2A206AFF8CD
+HELM_DIFF_KEY_ID=EA17A2A206AFF8CD
+
+case "$(uname -s):$(uname -m)" in
+    Linux:x86_64|Linux:amd64) HELM_DIFF_PLATFORM=linux-amd64 ;;
+    Linux:aarch64|Linux:arm64) HELM_DIFF_PLATFORM=linux-arm64 ;;
+    Linux:armv6l) HELM_DIFF_PLATFORM=linux-armv6 ;;
+    Linux:armv7l) HELM_DIFF_PLATFORM=linux-armv7 ;;
+    Darwin:x86_64|Darwin:amd64) HELM_DIFF_PLATFORM=macos-amd64 ;;
+    Darwin:arm64|Darwin:aarch64) HELM_DIFF_PLATFORM=macos-arm64 ;;
+    *) echo "Unsupported platform for Helm Diff: $(uname -s) $(uname -m)" >&2; exit 1 ;;
+esac
+
+if ! command -v helm >/dev/null 2>&1; then
+    echo "Helm Diff installation requires helm." >&2
+    exit 1
+fi
+
+HELM_PLUGINS="$(helm env HELM_PLUGINS)"
+MARKER="$HELM_PLUGINS/diff/.chezmoi-verified"
+EXPECTED_MARKER="$HELM_DIFF_VERSION $HELM_DIFF_FINGERPRINT"
+INSTALLED_VERSION="$(helm plugin list | awk '$1 == "diff" { print $2; exit }')"
+if [ "$INSTALLED_VERSION" = "$HELM_DIFF_VERSION" ] && [ -f "$MARKER" ] && [ "$(cat "$MARKER")" = "$EXPECTED_MARKER" ]; then
+    exit 0
+fi
+
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+GNUPGHOME="$TMP_DIR/gnupg"
+mkdir -m 700 "$GNUPGHOME"
+curl -fsSL https://github.com/databus23.gpg -o "$TMP_DIR/helm-diff.asc"
+GNUPGHOME="$GNUPGHOME" gpg --batch --quiet --import "$TMP_DIR/helm-diff.asc"
+ACTUAL_FINGERPRINT="$(GNUPGHOME="$GNUPGHOME" gpg --batch --with-colons --fingerprint "$HELM_DIFF_KEY_ID" | awk -F: '$1 == "fpr" { print $10; exit }')"
+if [ "$ACTUAL_FINGERPRINT" != "$HELM_DIFF_FINGERPRINT" ]; then
+    echo "Helm Diff signing-key fingerprint mismatch." >&2
+    exit 1
+fi
+GNUPGHOME="$GNUPGHOME" gpg --batch --export "$HELM_DIFF_FINGERPRINT" > "$TMP_DIR/helm-diff-keyring.gpg"
+case "$INSTALLED_VERSION" in
+    "") ;;
+    *) helm plugin uninstall diff ;;
+esac
+
+
+HELM_DIFF_ARCHIVE="diff-$HELM_DIFF_VERSION-$HELM_DIFF_PLATFORM.tgz"
+helm plugin install "https://github.com/databus23/helm-diff/releases/download/v$HELM_DIFF_VERSION/$HELM_DIFF_ARCHIVE" --keyring "$TMP_DIR/helm-diff-keyring.gpg"
+printf '%s\n' "$EXPECTED_MARKER" > "$MARKER"
+{{ else -}}
+#!/bin/sh
+exit 0
+{{ end }}

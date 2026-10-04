@@ -11,6 +11,7 @@ packages:
     - zoxide
     - eza
     - k9s
+    - gnupg
     - helm
 
   darwin:
