@@ -79,7 +79,7 @@ dot_config/
   nvim/                          # Neovim configuration
   process-compose/               # Darwin process configuration
   ghostty/                       # shared Ghostty configuration
-dot_omp/agent/                 # OMP configuration, MCP servers, and native skills
+dot_omp/private_agent/         # private OMP configuration, MCP servers, and native skills
 private_Library/LaunchAgents/    # macOS-only LaunchAgents
 ```
 

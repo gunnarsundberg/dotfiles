@@ -1,0 +1,5 @@
+theme:
+  dark: titanium
+retry:
+  maxRetries: 3
+setupVersion: 2
