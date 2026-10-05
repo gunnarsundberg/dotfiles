@@ -25,7 +25,6 @@ packages:
       - crit
       - process-compose
       - herdr
-      - rtk
       - omp
       - kubernetes-cli
     cask:
@@ -33,6 +32,7 @@ packages:
       - vicinae
       - lm-studio
       - openlogi
+      - omniwm
     roles:
       personal:
         formula:
@@ -52,7 +52,6 @@ packages:
           - infra
         cask:
           - claude-code
-          - 1password
           - 1password-cli
           - gcloud-cli
 
@@ -61,7 +60,6 @@ packages:
       - gnome-keyring
       - libsecret
       - fnm
-      - github-cli
       - kubectl
       - ghostty
     roles:
