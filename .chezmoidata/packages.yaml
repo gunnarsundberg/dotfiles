@@ -33,6 +33,7 @@ packages:
       - lm-studio
       - openlogi
       - omniwm
+      - hammerspoon
     roles:
       personal:
         formula:
