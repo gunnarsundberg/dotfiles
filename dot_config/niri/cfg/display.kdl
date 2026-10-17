@@ -7,3 +7,8 @@
     mode "2560x1440@359.979" // Set resolution and refresh rate
     scale 1 // No scaling (use 2 for HiDPI)
 }
+output "Apple Computer Inc StudioDisplay 0x4C3F7848" {
+    mode "2560x1440@60.000"
+    scale 1
+    position x=1645 y=0
+}
