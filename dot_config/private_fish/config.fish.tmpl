@@ -3,6 +3,8 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 {{ end }}
 
 {{ if eq .role "personal" }}
+# Use the persistent desktop Secret Service for Proton Pass sessions.
+set -gx PROTON_PASS_LINUX_KEYRING dbus
 # Match the Proton Pass SSH agent socket managed by the user service.
 set -gx SSH_AUTH_SOCK "$HOME/.ssh/proton-pass-agent.sock"
 {{ end }}
