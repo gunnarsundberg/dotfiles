@@ -60,6 +60,22 @@ chezmoi apply
 
 Edit tracked configuration in the source directory (`chezmoi cd`). Use `chezmoi edit <target>` to edit the source for a managed target, and `chezmoi apply` to deploy it.
 
+## Work environment variables
+
+The Fish config preserves the personal Proton Pass SSH socket and selects the 1Password agent socket on work macOS machines. Work-role Fish sessions also source `~/.config/local/env.fish` when it exists. Keep work-only values such as the internal Dagger runner endpoint in that local file, not in this repository; it is outside the chezmoi source and is not tracked or managed by chezmoi.
+
+Restrict the local env directory to mode `0700` and the file to `0600`. The file is plaintext on disk, and Fish exports its values to child processes; this does not configure GUI applications or services started outside Fish.
+
+## CLI editor defaults
+
+Fish exports `EDITOR`, `VISUAL`, and Git's higher-precedence `GIT_EDITOR` as `nvim`. CLI tools launched from Fish inherit these defaults; GUI applications and processes started outside Fish do not.
+
+## Project environments
+
+Direnv is listed as a shared package, and Fish enables its hook in interactive sessions when `direnv` is installed. Keep project services, dependencies, tests, and CI/local task definitions in Dagger; use direnv for host-side project environment variables and tool paths.
+
+Commit `.envrc` only for non-secret setup. For machine-local values, add `.env.local` to that project’s `.gitignore` and load it from `.envrc` with `dotenv_if_exists .env.local`. Review `.envrc` before running `direnv allow`. In CI, provide required values from the CI environment or secret store and pass them explicitly to Dagger rather than relying on a developer’s `.envrc`.
+
 ## Structure
 
 ```text
@@ -78,7 +94,7 @@ dot_config/
   systemd/user/                  # personal Linux Proton Pass agent service
   nvim/                          # Neovim configuration
   process-compose/               # Darwin process configuration
-  ghostty/                       # shared Ghostty configuration
+  ghostty/config.tmpl           # Noctalia on Linux; Catppuccin Mocha on macOS
 dot_omp/private_agent/         # private OMP configuration, MCP servers, and native skills
 private_Library/LaunchAgents/    # macOS-only LaunchAgents
 ```

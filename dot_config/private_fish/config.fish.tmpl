@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.osRelease.id "cachyos" }}
+{{ if eq (index .chezmoi.osRelease "id") "cachyos" }}
 source /usr/share/cachyos-fish-config/cachyos-config.fish
 {{ end }}
 
@@ -6,6 +6,27 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 # Match the Proton Pass SSH agent socket managed by the user service.
 set -gx SSH_AUTH_SOCK "$HOME/.ssh/proton-pass-agent.sock"
 {{ end }}
+
+{{ if and (eq .role "work") (eq .chezmoi.os "darwin") }}
+# Work Macs use the 1Password SSH agent.
+set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1Password/t/agent.sock"
+
+# Homebrew keeps this versioned MySQL client keg-only.
+if test -d /opt/homebrew/opt/mysql-client@8.4/bin
+    fish_add_path /opt/homebrew/opt/mysql-client@8.4/bin
+end
+{{ end }}
+
+{{ if eq .role "work" }}
+# Load work-only environment values from outside the chezmoi source.
+if test -r "$HOME/.config/local/env.fish"
+    source "$HOME/.config/local/env.fish"
+end
+{{ end }}
+
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+set -gx GIT_EDITOR nvim
 
 status is-login; and begin
     # Login shell initialisation
@@ -20,6 +41,10 @@ status is-interactive; and begin
 
     if command -q eza
         alias ls='eza -al --color=always --group-directories-first --icons=always'
+    end
+
+    if command -q direnv
+        direnv hook fish | source
     end
 {{ if eq .chezmoi.os "darwin" }}
     set -x HOMEBREW_NO_ANALYTICS 1

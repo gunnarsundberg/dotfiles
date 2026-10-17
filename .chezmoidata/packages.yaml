@@ -5,12 +5,14 @@ packages:
     - fzf
     - ripgrep
     - fish
+    - direnv
     - neovim
     - git
     - jujutsu
     - zoxide
     - eza
     - k9s
+    - btop
     - gnupg
     - helm
 
@@ -34,6 +36,7 @@ packages:
       - openlogi
       - omniwm
       - hammerspoon
+      - font-monaspace-nf
     roles:
       personal:
         formula:
@@ -51,10 +54,16 @@ packages:
           - container
           - gimme-aws-creds
           - infra
+          - cue
+          - docker-credential-helper
+          - hashicorp/tap/terraform
+          - mysql-client@8.4
         cask:
           - claude-code
           - 1password-cli
           - gcloud-cli
+          - antigravity-cli
+          - blackhole-2ch
 
   linux:
     pacman:
