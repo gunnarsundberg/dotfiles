@@ -93,8 +93,8 @@ dot_config/
   noctalia/                      # Linux desktop; T2 backlight setting is gated
   systemd/user/                  # personal Linux Proton Pass agent service
   nvim/                          # Neovim configuration
-  process-compose/               # Darwin process configuration
-  ghostty/config.tmpl           # Noctalia on Linux; Catppuccin Mocha on macOS
+  noctalia/                      # Linux desktop; Catppuccin Mocha shell palette
+  ghostty/config.tmpl           # Noctalia theme on Linux; Catppuccin Mocha on macOS
 dot_omp/private_agent/         # private OMP configuration, MCP servers, and native skills
 private_Library/LaunchAgents/    # macOS-only LaunchAgents
 ```
